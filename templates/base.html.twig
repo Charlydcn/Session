@@ -11,6 +11,40 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{ path('app_home') }}">Accueil</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_session') }}">Sessions</a>
+                </li>
+                {% if app.user %}
+                {# si il y a un utilisateur connecté #}
+                    <li>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                    {# si l'utilisateur est admin #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="">Admin</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+
+                {# si il n'y a aucun utilisateur connecté #}
+                    <li>
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+        {% block body %}
+        {% endblock %}
     </body>
 </html>
