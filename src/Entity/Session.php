@@ -147,4 +147,9 @@ class Session
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->dateDebut->format('d-m-Y') . " au " . $this->dateFin->format('d-m-Y') . " (Formation : " . $this->formation->getIntitule() . ")";
+    }
 }

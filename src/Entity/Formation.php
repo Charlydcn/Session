@@ -43,33 +43,8 @@ class Formation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Session>
-     */
-    public function getNommer(): Collection
+    public function __toString()
     {
-        return $this->nommer;
-    }
-
-    public function addNommer(Session $nommer): static
-    {
-        if (!$this->nommer->contains($nommer)) {
-            $this->nommer->add($nommer);
-            $nommer->setFormation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNommer(Session $nommer): static
-    {
-        if ($this->nommer->removeElement($nommer)) {
-            // set the owning side to null (unless already changed)
-            if ($nommer->getFormation() === $this) {
-                $nommer->setFormation(null);
-            }
-        }
-
-        return $this;
+        return $this->intitule;
     }
 }

@@ -25,6 +25,9 @@ class Module
     #[ORM\ManyToMany(targetEntity: Session::class, inversedBy: 'modules')]
     private Collection $programme;
 
+    #[ORM\Column]
+    private ?int $nbJours = null;
+
     public function __construct()
     {
         $this->programme = new ArrayCollection();
@@ -81,5 +84,22 @@ class Module
         $this->programme->removeElement($programme);
 
         return $this;
+    }
+
+    public function getNbJours(): ?int
+    {
+        return $this->nbJours;
+    }
+
+    public function setNbJours(int $nbJours): static
+    {
+        $this->nbJours = $nbJours;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->intitule;
     }
 }
