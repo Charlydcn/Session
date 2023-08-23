@@ -99,7 +99,7 @@ INSERT INTO `programme` (`id`, `session_id`, `module_id`, `nb_jours`) VALUES
 	(43, 7, 15, 10),
 	(44, 8, 15, 10);
 
--- Listage des données de la table session.session : ~0 rows (environ)
+-- Listage des données de la table session.session : ~8 rows (environ)
 INSERT INTO `session` (`id`, `formation_id`, `nb_places`, `date_debut`, `date_fin`) VALUES
 	(1, 1, 25, '2023-02-20 08:30:00', '2023-05-12 17:00:00'),
 	(2, 1, 25, '2023-07-10 08:30:00', '2023-12-22 17:00:00'),
@@ -110,24 +110,29 @@ INSERT INTO `session` (`id`, `formation_id`, `nb_places`, `date_debut`, `date_fi
 	(7, 4, 40, '2023-02-12 08:30:00', '2023-07-09 17:00:00'),
 	(8, 4, 40, '2023-09-05 08:30:00', '2023-12-22 17:00:00');
 
--- Listage des données de la table session.session_stagiaire : ~0 rows (environ)
+-- Listage des données de la table session.session_stagiaire : ~10 rows (environ)
 INSERT INTO `session_stagiaire` (`session_id`, `stagiaire_id`) VALUES
 	(1, 1),
 	(1, 3),
-	(2, 2),
+	(3, 1),
 	(3, 3),
 	(4, 1),
+	(4, 2),
+	(5, 4),
 	(6, 4),
+	(7, 2),
 	(8, 2);
 
--- Listage des données de la table session.stagiaire : ~0 rows (environ)
+-- Listage des données de la table session.stagiaire : ~4 rows (environ)
 INSERT INTO `stagiaire` (`id`, `nom`, `prenom`, `courriel`, `date_naissance`, `ville`, `telephone`, `sexe`) VALUES
 	(1, 'Ducounau', 'Charly', 'Charly.ducournau@outlook.fr', '2001-08-28 06:30:00', 'Strasbourg', '0629750614', 'Homme'),
-	(2, 'Doe', 'John', 'john.doe@mail.fr', '2000-01-01 01:01:01', 'Colmar', '0601100110', ''),
+	(2, 'Doe', 'John', 'john.doe@mail.fr', NULL, 'Colmar', '0611111111', NULL),
 	(3, 'Fussler', 'Grégory', 'gregory.fussler@outlook.fr', '2001-11-26 05:50:14', 'Strasbourg', '0655948532', ''),
 	(4, 'Urena', 'Ema', 'ema.urena@outlook.fr', '2001-06-26 00:01:30', 'Mulhouse', '0654765981', 'Femme');
 
 -- Listage des données de la table session.user : ~0 rows (environ)
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `pseudo`) VALUES
+	(1, 'charly@test.fr', '[]', '$2y$13$S3NZiBDtIE/Fwll9XrrHPOoelXmNzUqhk7XZI8hj8D9ZO/sEbwCEC', 'charly');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
