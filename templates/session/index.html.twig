@@ -21,7 +21,9 @@
                 </tr>
                 {% for session in formation.sessions %}
                 <tr>
-                    <td class="bg-light">{{ session.getDateDebut }}</td>
+                    <td class="bg-light">
+                        <a href="{{ path('show_session', {'id' : session.id}) }}">{{ session.getDateDebut }}</a>
+                    </td>
                     <td class="bg-light">{{ session.getDateFin }}</td>
                     <td class="bg-light">{{ session.nbPlaces }}</td>
                     <td class="bg-light">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
