@@ -9,6 +9,7 @@
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.pseudo) }}
         {{ form_row(registrationForm.password, {
             label: 'Password'
         }) }}
@@ -16,4 +17,5 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+
 {% endblock %}
