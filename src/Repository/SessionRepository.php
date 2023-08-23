@@ -21,6 +21,15 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
+    // public function getNextSession()
+    // {
+    //     // SELECT date_debut
+    //     // FROM session
+    //     // WHERE date_debut > CURDATE()
+    //     // ORDER BY date_debut ASC
+    //     // LIMIT 1;
+    // }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */
