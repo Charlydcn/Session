@@ -18,19 +18,16 @@ class Module
     #[ORM\Column(length: 75)]
     private ?string $intitule = null;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, inversedBy: 'modules')]
-    private Collection $programme;
-
-    #[ORM\Column]
-    private ?int $nbJours = null;
-
     #[ORM\ManyToOne(inversedBy: 'modules')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
+    #[ORM\OneToMany(mappedBy: 'module', targetEntity: Programme::class)]
+    private Collection $programmes;
+
     public function __construct()
     {
-        $this->programme = new ArrayCollection();
+        $this->programmes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,42 +47,6 @@ class Module
         return $this;
     }
 
-    /**
-     * @return Collection<int, Session>
-     */
-    public function getProgramme(): Collection
-    {
-        return $this->programme;
-    }
-
-    public function addProgramme(Session $programme): static
-    {
-        if (!$this->programme->contains($programme)) {
-            $this->programme->add($programme);
-        }
-
-        return $this;
-    }
-
-    public function removeProgramme(Session $programme): static
-    {
-        $this->programme->removeElement($programme);
-
-        return $this;
-    }
-
-    public function getNbJours(): ?int
-    {
-        return $this->nbJours;
-    }
-
-    public function setNbJours(int $nbJours): static
-    {
-        $this->nbJours = $nbJours;
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->intitule;
@@ -99,6 +60,36 @@ class Module
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Programme>
+     */
+    public function getProgrammes(): Collection
+    {
+        return $this->programmes;
+    }
+
+    public function addProgramme(Programme $programme): static
+    {
+        if (!$this->programmes->contains($programme)) {
+            $this->programmes->add($programme);
+            $programme->setModule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgramme(Programme $programme): static
+    {
+        if ($this->programmes->removeElement($programme)) {
+            // set the owning side to null (unless already changed)
+            if ($programme->getModule() === $this) {
+                $programme->setModule(null);
+            }
+        }
 
         return $this;
     }
