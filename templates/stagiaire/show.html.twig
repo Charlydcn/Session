@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail stagiaire{% endblock %}
+
+{% block body %}
+
+    <h1>{{ stagiaire }}</h1>
+    <ul>
+        <li><span>Nom :</span> {{ stagiaire.nom }}</li>
+        <li><span>Prénom :</span> {{ stagiaire.prenom }}</li>
+        <li><span>Courriel :</span> {{ stagiaire.courriel }}</li>
+        <li><span>Âge :</span> {{ stagiaire.dateNaissance ? stagiaire.getAge ~ " ans" : "Non renseigné"}}</li>
+        <li><span>Ville :</span> {{ stagiaire.ville }}</li>
+        <li><span>Téléphone :</span> {{ stagiaire.telephone }}</li>
+        <li><span>Sexe :</span> {{ stagiaire.sexe ? stagiaire.sexe : "Non renseigné" }}</li>
+    </ul>
+
+    {% if stagiaire.sessions %}
+        <h2>Sessions inscrites</h2>
+        <ul>
+            {% for session in stagiaire.sessions %}
+                <li>
+                    <a class="text-decoration-none" href="#">{{ session.formation }}</a>
+                    ({{ session.dateDebut ~ " au " ~ session.dateFin}})
+                </li>
+            {% endfor %}
+        </ul>  
+    {% endif %}
+
+
+{% endblock %}
