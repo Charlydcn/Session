@@ -5,44 +5,45 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         {% endblock %}
 
         {% block javascripts %}
         {% endblock %}
     </head>
     <body>
-        <nav>
-            <ul>
-                <li>
-                    <a href="{{ path('app_home') }}">Accueil</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_session') }}">Sessions</a>
-                </li>
-                {% if app.user %}
-                {# si il y a un utilisateur connecté #}
-                    <li>
-                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    </li>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+
+            <a class="navbar-brand" href="#">Session</a>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="{{ path('app_home') }}">Accueil</a>
+                    <a class="nav-item nav-link" href="{{ path('app_session') }}">Sessions</a>
+                    <a class="nav-item nav-link" href="{{ path('app_formation') }}">Formations</a>
+                    <a class="nav-item nav-link" href="{{ path('app_stagiaire') }}">Stagiaires</a>
+                    {% if app.user %}
+                    {# si il y a un utilisateur connecté #}
+                    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    
                     {# si l'utilisateur est admin #}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a href="">Admin</a>
-                        </li>
+                    <a class="nav-item nav-link" href="">Admin</a>
+                    
                     {% endif %}
-                {% else %}
+                    {% else %}
+                    
+                    {# si il n'y a aucun utilisateur connecté #}
+                    <a class="nav-item nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                    <a class="nav-item nav-link" href="{{ path('app_register') }}">S'inscrire</a>
+                        
+                        
+                    {% endif %}
+                </div>
+            </div>
 
-                {# si il n'y a aucun utilisateur connecté #}
-                    <li>
-                        <a href="{{ path('app_login') }}">Se connecter</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_register') }}">S'inscrire</a>
-                    </li>
-                {% endif %}
-
-            </ul>
-        </nav>
+          </nav>
 
         {% block body %}
         {% endblock %}
