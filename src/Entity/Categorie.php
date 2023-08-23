@@ -19,11 +19,11 @@ class Categorie
     private ?string $nom = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Module::class)]
-    private Collection $categoriser;
+    private Collection $modules;
 
     public function __construct()
     {
-        $this->categoriser = new ArrayCollection();
+        $this->modules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,38 +43,38 @@ class Categorie
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
     /**
      * @return Collection<int, Module>
      */
-    public function getCategoriser(): Collection
+    public function getModules(): Collection
     {
-        return $this->categoriser;
+        return $this->modules;
     }
 
-    public function addCategoriser(Module $categoriser): static
+    public function addModule(Module $module): static
     {
-        if (!$this->categoriser->contains($categoriser)) {
-            $this->categoriser->add($categoriser);
-            $categoriser->setCategorie($this);
+        if (!$this->modules->contains($module)) {
+            $this->modules->add($module);
+            $module->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeCategoriser(Module $categoriser): static
+    public function removeModule(Module $module): static
     {
-        if ($this->categoriser->removeElement($categoriser)) {
+        if ($this->modules->removeElement($module)) {
             // set the owning side to null (unless already changed)
-            if ($categoriser->getCategorie() === $this) {
-                $categoriser->setCategorie(null);
+            if ($module->getCategorie() === $this) {
+                $module->setCategorie(null);
             }
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->nom;
     }
 }

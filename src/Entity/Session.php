@@ -28,11 +28,11 @@ class Session
     #[ORM\ManyToMany(targetEntity: Module::class, mappedBy: 'programme')]
     private Collection $modules;
 
-    #[ORM\ManyToOne(inversedBy: 'nommer')]
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
 
-    #[ORM\ManyToMany(targetEntity: Stagiaire::class, mappedBy: 'inscrire')]
+    #[ORM\ManyToMany(targetEntity: Stagiaire::class, inversedBy: 'sessions')]
     private Collection $stagiaires;
 
     public function __construct()
@@ -58,9 +58,9 @@ class Session
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?string
     {
-        return $this->dateDebut;
+        return $this->dateDebut->format('d-m-Y');
     }
 
     public function setDateDebut(\DateTimeInterface $dateDebut): static
@@ -70,9 +70,9 @@ class Session
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getDateFin(): ?string
     {
-        return $this->dateFin;
+        return $this->dateFin->format('d-m-Y');
     }
 
     public function setDateFin(\DateTimeInterface $dateFin): static
@@ -109,6 +109,12 @@ class Session
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->dateDebut . " au " . $this->getDateFin;
+        //  . " (Formation : " . $this->formation->getIntitule() . ")";
+    }
+
     public function getFormation(): ?Formation
     {
         return $this->formation;
@@ -133,7 +139,6 @@ class Session
     {
         if (!$this->stagiaires->contains($stagiaire)) {
             $this->stagiaires->add($stagiaire);
-            $stagiaire->addInscrire($this);
         }
 
         return $this;
@@ -141,15 +146,8 @@ class Session
 
     public function removeStagiaire(Stagiaire $stagiaire): static
     {
-        if ($this->stagiaires->removeElement($stagiaire)) {
-            $stagiaire->removeInscrire($this);
-        }
+        $this->stagiaires->removeElement($stagiaire);
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->dateDebut->format('d-m-Y') . " au " . $this->dateFin->format('d-m-Y') . " (Formation : " . $this->formation->getIntitule() . ")";
     }
 }

@@ -37,12 +37,12 @@ class Stagiaire
     #[ORM\Column(length: 15)]
     private ?string $sexe = null;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, inversedBy: 'stagiaires')]
-    private Collection $inscrire;
+    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'stagiaires')]
+    private Collection $sessions;
 
     public function __construct()
     {
-        $this->inscrire = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,32 +134,35 @@ class Stagiaire
         return $this;
     }
 
+    public function __toString()
+    {
+        return strtoupper($this->nom) . " " . ucfirst($this->prenom);
+    }
+
     /**
      * @return Collection<int, Session>
      */
-    public function getInscrire(): Collection
+    public function getSessions(): Collection
     {
-        return $this->inscrire;
+        return $this->sessions;
     }
 
-    public function addInscrire(Session $inscrire): static
+    public function addSession(Session $session): static
     {
-        if (!$this->inscrire->contains($inscrire)) {
-            $this->inscrire->add($inscrire);
+        if (!$this->sessions->contains($session)) {
+            $this->sessions->add($session);
+            $session->addStagiaire($this);
         }
 
         return $this;
     }
 
-    public function removeInscrire(Session $inscrire): static
+    public function removeSession(Session $session): static
     {
-        $this->inscrire->removeElement($inscrire);
+        if ($this->sessions->removeElement($session)) {
+            $session->removeStagiaire($this);
+        }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return strtoupper($this->nom) . " " . ucfirst($this->prenom);
     }
 }

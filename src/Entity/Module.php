@@ -18,15 +18,15 @@ class Module
     #[ORM\Column(length: 75)]
     private ?string $intitule = null;
 
-    #[ORM\ManyToOne(inversedBy: 'categoriser')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $categorie = null;
-
     #[ORM\ManyToMany(targetEntity: Session::class, inversedBy: 'modules')]
     private Collection $programme;
 
     #[ORM\Column]
     private ?int $nbJours = null;
+
+    #[ORM\ManyToOne(inversedBy: 'modules')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
 
     public function __construct()
     {
@@ -46,18 +46,6 @@ class Module
     public function setIntitule(string $intitule): static
     {
         $this->intitule = $intitule;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): static
-    {
-        $this->categorie = $categorie;
 
         return $this;
     }
@@ -101,5 +89,17 @@ class Module
     public function __toString()
     {
         return $this->intitule;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }
