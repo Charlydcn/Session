@@ -25,9 +25,6 @@ class Session
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\ManyToMany(targetEntity: Module::class, mappedBy: 'programme')]
-    private Collection $modules;
-
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
@@ -35,10 +32,13 @@ class Session
     #[ORM\ManyToMany(targetEntity: Stagiaire::class, inversedBy: 'sessions')]
     private Collection $stagiaires;
 
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Programme::class)]
+    private Collection $programmes;
+
     public function __construct()
     {
-        $this->modules = new ArrayCollection();
         $this->stagiaires = new ArrayCollection();
+        $this->programmes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,33 +82,6 @@ class Session
         return $this;
     }
 
-    /**
-     * @return Collection<int, Module>
-     */
-    public function getModules(): Collection
-    {
-        return $this->modules;
-    }
-
-    public function addModule(Module $module): static
-    {
-        if (!$this->modules->contains($module)) {
-            $this->modules->add($module);
-            $module->addProgramme($this);
-        }
-
-        return $this;
-    }
-
-    public function removeModule(Module $module): static
-    {
-        if ($this->modules->removeElement($module)) {
-            $module->removeProgramme($this);
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->dateDebut . " au " . $this->getDateFin;
@@ -147,6 +120,36 @@ class Session
     public function removeStagiaire(Stagiaire $stagiaire): static
     {
         $this->stagiaires->removeElement($stagiaire);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Programme>
+     */
+    public function getProgrammes(): Collection
+    {
+        return $this->programmes;
+    }
+
+    public function addProgramme(Programme $programme): static
+    {
+        if (!$this->programmes->contains($programme)) {
+            $this->programmes->add($programme);
+            $programme->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgramme(Programme $programme): static
+    {
+        if ($this->programmes->removeElement($programme)) {
+            // set the owning side to null (unless already changed)
+            if ($programme->getSession() === $this) {
+                $programme->setSession(null);
+            }
+        }
 
         return $this;
     }
