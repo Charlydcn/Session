@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SessionController!{% endblock %}
+{% block title %}Sessions{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Liste des sessions</h1>
+    <table class="table w-50 text-center table-responsive">
+        <thead>
+            <tr>
+                <th class="bg-primary text-white">Date de début</th>
+                <th class="bg-primary text-white">Date de fin</th>
+                <th class="bg-primary text-white">Places</th>
+                <th class="bg-primary text-white">Places restantes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+                <tr>
+                    <th colspan="4" class="text-center" style="background-color: #e3f2fd;">{{ formation.intitule }}</th>
+                </tr>
+                {% for session in formation.sessions %}
+                <tr>
+                    <td class="bg-light">{{ session.getDateDebut }}</td>
+                    <td class="bg-light">{{ session.getDateFin }}</td>
+                    <td class="bg-light">{{ session.nbPlaces }}</td>
+                    <td class="bg-light">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
+                </tr>
+                {% endfor %}
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/Session/src/Controller/SessionController.php'|file_link(0) }}">src/Controller/SessionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/Session/templates/session/index.html.twig'|file_link(0) }}">templates/session/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
