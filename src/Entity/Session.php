@@ -60,7 +60,7 @@ class Session
 
     public function getDateDebut(): ?string
     {
-        return $this->dateDebut->format('d-m-Y');
+        return $this->dateDebut->format('d/m/Y');
     }
 
     public function setDateDebut(\DateTimeInterface $dateDebut): static
@@ -72,7 +72,7 @@ class Session
 
     public function getDateFin(): ?string
     {
-        return $this->dateFin->format('d-m-Y');
+        return $this->dateFin->format('d/m/Y');
     }
 
     public function setDateFin(\DateTimeInterface $dateFin): static
