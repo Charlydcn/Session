@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %} Accueil {% endblock %}
 
 {% block body %}
-
-<h1>Bonjour</h1>
-
+    <h1>Bonjour {{ (app.user) ? app.user.pseudo : '' }}</h1>
 {% endblock %}
