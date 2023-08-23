@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail session {{ session }}{% endblock %}
+
+{% block body %}
+
+    <h1>Session du {{ session.getDateDebut ~ " au " ~ session.getDateFin ~ "(" ~ session.formation ~ ")" }}</h1>
+
+    <table class="table w-25 text-center table-responsive">
+        <thead>
+            <tr>
+                <th class="bg-primary text-white">Module</th>
+                <th class="bg-primary text-white">Durée en jours</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for programme in programmes %}
+            <tr>
+                <td class="bg-light">{{ programme.module }}</td>
+                <td class="bg-light">{{ programme.nbJours }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h2>Stagiaires inscrit à la session</h2>
+        
+    <ul>
+        {% for stagiaire in session.stagiaires %}
+            <li>
+                <a class="text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
