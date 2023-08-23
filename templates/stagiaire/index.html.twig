@@ -19,10 +19,10 @@
         {% for stagiaire in stagiaires %}
             <tr>
                 <td class="bg-light">
-                    <a class="bg-light text-decoration-none" href="#">{{ stagiaire.nom }}</a>
+                    <a class="bg-light text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom }}</a>
                 </td>
                 <td class="bg-light">
-                    <a class="bg-light text-decoration-none" href="#">{{ stagiaire.prenom }}</a>
+                    <a class="bg-light text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.prenom }}</a>
                 </td>
                 <td class="bg-light">{{ stagiaire.ville }}</td>
             </tr>
@@ -30,22 +30,4 @@
         
         </tbody>
     </table>
-
-    {# SHOW #}
-    {# <ul>
-        <li>Nom : {{ stagiaire.nom }}</li>
-        <li>Prénom : {{ stagiaire.prenom }}</li>
-        <li>Courriel : {{ stagiaire.courriel }}</li>
-        <li>Âge : {{ stagiaire.getAge }}</li>
-        <li>Ville : {{ stagiaire.ville }}</li>
-        <li>Téléphone : {{ stagiaire.telephone }}</li>
-        <li>Sexe : {{ stagiaire.sexe }}</li>
-    </ul>
-
-    <ul>
-        {% for session in stagiaire.sessions %}
-            <li>{{ session.formation "(" . session.dateDebut . " au " . session.dateFin . ")" }}</li>
-        {% endfor %}
-    </ul> #}
-
 {% endblock %}
