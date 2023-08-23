@@ -34,7 +34,7 @@ class Stagiaire
     #[ORM\Column(length: 20)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 15)]
+    #[ORM\Column(length: 15, nullable: true)]
     private ?string $sexe = null;
 
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'stagiaires')]
