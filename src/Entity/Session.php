@@ -84,7 +84,7 @@ class Session
 
     public function __toString()
     {
-        return $this->dateDebut . " au " . $this->getDateFin;
+        return $this->getDateDebut() . " au " . $this->getDateFin();
         //  . " (Formation : " . $this->formation->getIntitule() . ")";
     }
 
