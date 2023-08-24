@@ -64,4 +64,9 @@ class Programme
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->session . " " . $this->module . " " . $this->nbJours;
+    }
 }
