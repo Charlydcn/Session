@@ -100,10 +100,13 @@ class Stagiaire
 
     public function getAge(): ?int
     {
-        $d = new \DateTime(); // date actuelle
-        $diff = $d->diff($this->dateNaissance); // diff entre date actuelle et date naissance du stagiaire
-        
-        return $diff->y; // return l'année
+        if ($this->dateNaissance) {
+            $now = new \DateTime();
+            $interval = $this->dateNaissance->diff($now);
+            return $interval->format("%Y");
+        } else {
+            return false;
+        }
     }
 
     public function getVille(): ?string
