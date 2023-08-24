@@ -58,9 +58,9 @@ class Session
         return $this;
     }
 
-    public function getDateDebut(): ?string
+    public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->dateDebut->format('d/m/Y');
+        return $this->dateDebut;
     }
 
     public function setDateDebut(\DateTimeInterface $dateDebut): static
@@ -70,9 +70,9 @@ class Session
         return $this;
     }
 
-    public function getDateFin(): ?string
+    public function getDateFin(): ?\DateTimeInterface
     {
-        return $this->dateFin->format('d/m/Y');
+        return $this->dateFin;
     }
 
     public function setDateFin(\DateTimeInterface $dateFin): static
@@ -82,10 +82,14 @@ class Session
         return $this;
     }
 
+    public function getDate(): ?string
+    {
+        return $this->dateDebut->format('d/m/Y') . " au " . $this->dateFin->format('d/m/Y');
+    }
+
     public function __toString()
     {
-        return $this->getDateDebut() . " au " . $this->getDateFin() . " (" . $this->formation . ")";
-        //  . " (Formation : " . $this->formation->getIntitule() . ")";
+        return $this->getDate();
     }
 
     public function getFormation(): ?Formation
