@@ -1,22 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail session {{ session }}{% endblock %}
+{% block title %}Détail session{% endblock %}
 
 {% block body %}
 
-    <h1>Session du {{ session.getDateDebut ~ " au " ~ session.getDateFin ~ "(" ~ session.formation ~ ")" }}</h1>
+    <h1>Session du {{ session.getDateDebut ~ " au " ~ session.getDateFin }}</h1>
+    <h2><a class="text-dark text-decoration-none" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a></h2>
 
-    <table class="table w-25 text-center table-responsive">
+    <table class="table w-50 text-center table-responsive">
         <thead>
             <tr>
+                <th class="bg-primary text-white">Catégorie</th>
                 <th class="bg-primary text-white">Module</th>
                 <th class="bg-primary text-white">Durée en jours</th>
             </tr>
         </thead>
         <tbody>
-            {% for programme in programmes %}
+            {% for programme in session.programmes %}
             <tr>
-                <td class="bg-light">{{ programme.module }}</td>
+                <td class="bg-light">{{ programme.module.categorie }}</td>
+                <td class="fw-bold bg-light">{{ programme.module }}</td>
                 <td class="bg-light">{{ programme.nbJours }}</td>
             </tr>
             {% endfor %}
