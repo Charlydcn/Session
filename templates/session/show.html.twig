@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1>Session du {{ session.getDateDebut ~ " au " ~ session.getDateFin }}</h1>
+    <h1>Session du {{ session.getDate }}</h1>
     <h2><a class="text-dark text-decoration-none" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a></h2>
 
     <table class="table w-50 text-center table-responsive">

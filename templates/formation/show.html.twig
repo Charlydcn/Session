@@ -11,8 +11,7 @@
     <table class="table w-50 text-center table-responsive">
         <thead>
             <tr>
-                <th class="bg-primary text-white">Date de début</th>
-                <th class="bg-primary text-white">Date de fin</th>
+                <th colspan="2" class="bg-primary text-white">Date</th>
                 <th class="bg-primary text-white">Places</th>
                 <th class="bg-primary text-white">Places restantes</th>
                 <th class="bg-primary text-white">Détail</th>
@@ -21,8 +20,7 @@
         <tbody>
             {% for session in formation.sessions %}
             <tr>
-                <td class="bg-light">{{ session.getDateDebut }}</td>
-                <td class="bg-light">{{ session.getDateFin }}</td>
+                <td colspan="2" ="bg-light">{{ session.getDate }}</td>
                 <td class="bg-light">{{ session.nbPlaces }}</td>
                 <td class="bg-light">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
                 <td class="bg-light">
