@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use App\Repository\FormationRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +21,39 @@ class SessionController extends AbstractController
 
         return $this->render('session/index.html.twig', [
             'formations' => $formations,
+        ]);
+    }
+
+    #[Route('/session/new', name: 'new_session')]
+    // #[Route('/session/{id}/edit', name: 'edit_session')]
+    public function new(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // if (!$session) {
+            $session = new Session();
+        // }
+        
+        // On créer le formulaire à partir du formType (sessionType)
+        $form = $this->createForm(SessionType::class, $session);
+
+        //  On 'handle' la requête
+        $form->handleRequest($request);
+
+        // Si le formulaire est soumis et valide,
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // on récupère les données
+            $session = $form->getData();
+            // persist = prepare PDO
+            $entityManager->persist($session);
+            // flush = execute PDO
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_session');
+        }
+        
+        return $this->render('session/new.html.twig', [
+            'addSessionForm' => $form,
+            // 'edit' => $session->getId()
         ]);
     }
 
