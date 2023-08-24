@@ -17,7 +17,7 @@
         {% for formation in formations %}
             <tr>
                 <td class="bg-light">
-                    <a class="text-decoration-none" href="#">{{ formation }}</a>
+                    <a class="text-decoration-none" href="{{ path('show_formation', {'id' : formation.id}) }}">{{ formation }}</a>
                 </td>
                 <td class="bg-light text-decoration-none">
                     {{ formation.sessions|length }}
