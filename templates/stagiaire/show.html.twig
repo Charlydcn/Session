@@ -20,8 +20,8 @@
         <ul>
             {% for session in stagiaire.sessions %}
                 <li>
-                    <a class="text-decoration-none" href="#">{{ session.formation }}</a>
-                    ({{ session.dateDebut ~ " au " ~ session.dateFin}})
+                    <a class="text-decoration-none" href="{{ path('show_session', {'id' : session.id}) }}">{{ session.dateDebut ~ " au " ~ session.dateFin}}</a>
+                    <a class="text-dark text-decoration-none" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{ session.formation }})</a>
                 </li>
             {% endfor %}
         </ul>  
