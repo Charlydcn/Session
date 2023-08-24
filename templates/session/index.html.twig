@@ -12,21 +12,27 @@
                 <th class="bg-primary text-white">Date de fin</th>
                 <th class="bg-primary text-white">Places</th>
                 <th class="bg-primary text-white">Places restantes</th>
+                <th class="bg-primary text-white">Détail</th>
             </tr>
         </thead>
         <tbody>
             {% for formation in formations %}
                 <tr>
-                    <th colspan="4" class="text-center" style="background-color: #e3f2fd;">{{ formation.intitule }}</th>
+                    <th colspan="5" class="text-center" style="background-color: #e3f2fd;">
+                        <a class="text-dark text-decoration-none" href="{{ path('show_formation', {'id' : formation.id}) }}">{{ formation.intitule }}</a>
+                    </th>
                 </tr>
                 {% for session in formation.sessions %}
                 <tr>
-                    <td class="bg-light">
-                        <a href="{{ path('show_session', {'id' : session.id}) }}">{{ session.getDateDebut }}</a>
-                    </td>
+                    <td class="bg-light">{{ session.getDateDebut }}</td>
                     <td class="bg-light">{{ session.getDateFin }}</td>
                     <td class="bg-light">{{ session.nbPlaces }}</td>
                     <td class="bg-light">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
+                    <td class="bg-light">
+                        <a class="text-decoration-none" href="{{ path('show_session', {'id' : session.id}) }}">
+                            <i class="fa-solid fa-list-ul"></i>
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             {% endfor %}
