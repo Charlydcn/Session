@@ -12,6 +12,10 @@
                 <th class="bg-primary text-white">Nom</th>
                 <th class="bg-primary text-white">Prénom</th>
                 <th class="bg-primary text-white">Ville</th>
+                {# si l'utilisateur est admin #}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th class="bg-primary text-white"></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -25,8 +29,24 @@
                     <a class="bg-light text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.prenom }}</a>
                 </td>
                 <td class="bg-light">{{ stagiaire.ville }}</td>
+                {# si l'utilisateur est admin #}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="bg-light">
+                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <tr>
+                <td class="bg-light" colspan="4">
+                    <a class="text-decoration-none" href="{{ path('new_stagiaire') }}">
+                        <i class="fa-solid fa-plus"></i>
+                        Ajouter un nouveau stagiaire
+                    </a>
+                </td>
+            </tr>
+        {% endif %}
         
         </tbody>
     </table>
