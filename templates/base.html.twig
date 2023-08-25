@@ -29,6 +29,7 @@
                     {% if app.user %}
                     {# si il y a un utilisateur connecté #}
                     <a class="nav-item nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    <a class="nav-item nav-link">Connecté en que <span class="fw-bold text-dark">{{ app.user }}</span></a>
                     {% else %}
                     {# si il n'y a aucun utilisateur connecté #}
                     <a class="nav-item nav-link" href="{{ path('app_login') }}">Se connecter</a>
