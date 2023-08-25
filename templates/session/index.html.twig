@@ -8,8 +8,7 @@
     <table class="table w-50 text-center table-responsive">
         <thead>
             <tr>
-                <th class="bg-primary text-white">Date de début</th>
-                <th class="bg-primary text-white">Date de fin</th>
+                <th colspan="2" class="bg-primary text-white">Date</th>
                 <th class="bg-primary text-white">Places</th>
                 <th class="bg-primary text-white">Places restantes</th>
                 <th class="bg-primary text-white">Détail</th>
@@ -24,8 +23,7 @@
                 </tr>
                 {% for session in formation.sessions %}
                 <tr>
-                    <td class="bg-light">{{ session.getDateDebut }}</td>
-                    <td class="bg-light">{{ session.getDateFin }}</td>
+                    <td colspan="2" class="bg-light">{{session.getDate}}</td>
                     <td class="bg-light">{{ session.nbPlaces }}</td>
                     <td class="bg-light">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
                     <td class="bg-light">
@@ -33,10 +31,27 @@
                             <i class="fa-solid fa-list-ul"></i>
                         </a>
                     </td>
+                    {# <td>
+                        <a href="{{ path('delete_session', {'id': session.id}) }}">
+                            <i class="fa-solid trash-can"></i>
+                        </a>
+                    </td> #}
                 </tr>
                 {% endfor %}
             {% endfor %}
             </tr>
+
+            {# on affiche le bouton d'ajout de nouvelle session si l'utilisateur est connecté et admin #}
+            {% if is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td class="bg-light" colspan="5">
+                        <a class="text-decoration-none" href="{{ path('new_session') }}">
+                            <i class="fa-solid fa-plus"></i>
+                            Ajouter une nouvelle session
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
