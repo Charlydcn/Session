@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use App\Repository\FormationRepository;
+use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
@@ -58,29 +61,48 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'show_session')]
-    public function show(Session $session): Response
+    public function show(Session $session, SessionRepository $sessionRepository): Response
     {
+        $id = $session->getId();
+
+        $stagiairesNonInscrits = $sessionRepository->getStagiairesNonInscrits($id);
+
         return $this->render('session/show.html.twig', [
             'session' => $session,
+            'stagiairesNonInscrits' => $stagiairesNonInscrits,
         ]);
     }
 
-    // #[Route('/entreprise/{id}', name: 'show_entreprise')]
-    // public function show(Entreprise $entreprise) : Response
-    // {
-    //     return $this->render('entreprise/show.html.twig', [
-    //         'entreprise' => $entreprise,
-    //     ]);
-    // }
+    
+    #[Route('/session/{id}/{idStagiaire}/add', name: 'add_stagiaire_to_session')]
+    public function addStagiaire(Session $session,
+    // MapEntity : nécessite un "use" en haut de la page, permet de donner le nom qu'on veut dans la variable d'objet ($stagiare),
+    // le MapEntity fait le lien entre idStagiaire et le renomme en $stagiaire qu'on déclare après
+    #[MapEntity(id: 'idStagiaire')] Stagiaire $stagiaire,
+    StagiaireRepository $stagiaireRepository, EntityManagerInterface $entityManager)
+    {
+        // on utilise la méthode addStagiaire de l'entité Session en passant en paramètre l'objet $stagiaire
+        $session->addStagiaire($stagiaire);
+        // flush pour faire la requête qui va modifier la BDD
+        $entityManager->flush();
 
-    // requête pour avoir la date la plus proche:
-    // SELECT date_debut
-    // FROM session
-    // WHERE date_debut > CURDATE() & formation_id = :id
-    // ORDER BY date_debut ASC
-    // LIMIT 1;
+        return $this->redirectToRoute('show_session', [
+            'id' => $session->getId(),
+        ]);
+    }
 
-    // peut-être faisable comme ça
-    // $closestSession = $sessionRepository->findBy(["date_debut" => "CURDATE() AND formation_id = $id"], ["date_debut" => "ASC"], 1);        
+    #[Route('/session/{id}/{idStagiaire}/remove', name: 'remove_stagiaire_from_session')]
+    public function removeStagiaire(Session $session,
+    #[MapEntity(id: 'idStagiaire')] Stagiaire $stagiaire,
+    StagiaireRepository $stagiaireRepository, EntityManagerInterface $entityManager)
+    {
+        // on utilise la méthode removeStagiaire de l'entité Session en passant en paramètre l'objet $stagiaire
+        $session->removeStagiaire($stagiaire);
+        // persist pour que Symfony se rende compte qu'il y a un changement à faire en BDD
+        $entityManager->persist($session);
+        // flush pour faire la requête qui va modifier la BDD
+        $entityManager->flush();
 
+        return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
+    }
 }
