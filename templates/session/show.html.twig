@@ -26,14 +26,45 @@
         </tbody>
     </table>
     
-    <h2>Stagiaires inscrit à la session</h2>
+    <h2>Stagiaire(s) inscrit(s) à la session (total: {{session.stagiaires|length}})</h2>
         
-    <ul>
+    <table>
         {% for stagiaire in session.stagiaires %}
-            <li>
-                <a class="text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+            <tr>
+                <td class="text-decoration-none">
+                    <a href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</a>
+                </td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td>
+                        <a href="{{ path('remove_stagiaire_from_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">Supprimer de la session</a>
+                    </td>
+                {% endif %}
+            </tr>
+    {% endfor %}
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <h2>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h2>
+    <table class="table w-25 text-center table-responsive">
+        <thead>
+        </thead>
+        <tbody>
+            {% for stagiaire in stagiairesNonInscrits %}
+                <tr class="bg-light">
+                    <td>
+                        <a class="text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
+                            {{ stagiaire.nom|upper ~ " " ~stagiaire.prenom|capitalize }}
+                        </a>
+                    </td>
+                    <td class="bg-light">
+                        <a class="text-decoration-none" href="{{ path('add_stagiaire_to_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">
+                            <i class="fa-solid fa-plus"></i>
+                            Ajouter à la session
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
 
 {% endblock %}
