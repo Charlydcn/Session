@@ -66,10 +66,12 @@ class SessionController extends AbstractController
         $id = $session->getId();
 
         $stagiairesNonInscrits = $sessionRepository->getStagiairesNonInscrits($id);
+        $modulesNonUtilisés = $sessionRepository->getModulesNonUtilisés($id);
 
         return $this->render('session/show.html.twig', [
             'session' => $session,
             'stagiairesNonInscrits' => $stagiairesNonInscrits,
+            'modulesNonUtilisés' => $modulesNonUtilisés,
         ]);
     }
 
