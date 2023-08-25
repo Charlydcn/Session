@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Stagiaires{% endblock %}
+{% block title %}Ajouter un stagiaire{% endblock %}
 
 {% block body %}
 
     <h1>Ajouter un stagiaire</h1>
 
-    {{ form(newStagiaireForm) }}
+    {{ form(addStagiaireForm, {'attr': {'class': 'w-50 m-2'}}) }}
 
 {% endblock %}
