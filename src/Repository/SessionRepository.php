@@ -21,14 +21,56 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-    // public function getNextSession()
-    // {
-    //     // SELECT date_debut
-    //     // FROM session
-    //     // WHERE date_debut > CURDATE()
-    //     // ORDER BY date_debut ASC
-    //     // LIMIT 1;
-    // }
+    public function getStagiairesNonInscrits($id)
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+        // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+        $qb->select('s')
+            ->from('App\Entity\Stagiaire', 's')
+            ->leftJoin('s.sessions', 'se')
+            ->where('se.id = :id');
+        
+        $sub = $em->createQueryBuilder();
+        // sélectionner tous les stagiaires qui ne SONT PAS (NOT IN) dans le résultat précédent
+        // on obtient donc les stagiaires non inscrits pour une session définie
+        $sub->select('st')
+            ->from('App\Entity\Stagiaire', 'st')
+            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+            // requête paramétrée
+            ->setParameter('id', $id)
+            // trier la liste des stagiaires sur le nom de famille
+            ->orderBy('st.nom');
+        
+        // renvoyer le résultat
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
+    public function getModulesNonUtilisés($id)
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+
+        $qb = $sub;
+
+        $qb->select('p')
+            ->from('App\Entity\Programme' , 'p')
+            // ->WHERE NOT programme.session_id = :id (l'id de la session)
+            // ->whereNot()
+            // requête paramétrée
+            ->setParameter('id', $id);
+
+            // mais si je fais ce WHERE NOT ça me donne tout les programmes (module, session, nbJours) qui ne sont pas lié à ma session, mais je 
+            // dois changer le nbJours de l'entité Programme que j'ajoute à ma session
+            
+
+        dd($qb);
+    }
+
+
 
 //    /**
 //     * @return Session[] Returns an array of Session objects
