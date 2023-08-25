@@ -54,9 +54,10 @@ class StagiaireType extends AbstractType
             ->add('telephone', TelType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'maxlength' => 15,
                 ],
                 'constraints' => [
-                    new Length(['min' => 10, 'max' => 20]),
+                    new Length(['min' => 10, 'max' => 15]),
                 ],
             ])
 
