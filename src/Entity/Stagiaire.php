@@ -31,7 +31,7 @@ class Stagiaire
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 15)]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 15, nullable: true)]
