@@ -49,25 +49,42 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    // RECUPERER TOUT LES MODULES D'UNE SESSION
+    // SELECT module.intitule AS "Module"
+    // FROM programme
+    // INNER JOIN module ON programme.module_id = module.id
+    // WHERE programme.session_id = 5
+
+    // A PARTIR DE L'AUTRE REQUETE, RECUPERER TOUT LES MODULES
+    // QUI NE SONT PAS CEUX DEJA PRESENTS DANS LA SESSION
+
+
     public function getModulesNonUtilisés($id)
     {
         $em = $this->getEntityManager();
         $sub = $em->createQueryBuilder();
 
         $qb = $sub;
+        // sélectionner tout les modules d'une session dont l'id est passé en paramètre
+        $qb->select('m.id')
+            ->from('App\Entity\Programme', 'p')
+            ->leftJoin('p.module', 'm')
+            ->where('p.session = :id');
 
-        $qb->select('p')
-            ->from('App\Entity\Programme' , 'p')
-            // ->WHERE NOT programme.session_id = :id (l'id de la session)
-            // ->whereNot()
+        $sub = $em->createQueryBuilder();
+
+        // sélectionner tout les modules qui ne sont pas ceux présent dans la dernière requête
+        $sub->select('mo')
+            ->from('App\Entity\Module', 'mo')
+            ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
             // requête paramétrée
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+            // requête trié par intitulé de module
+            ->orderBy('mo.intitule');
 
-            // mais si je fais ce WHERE NOT ça me donne tout les programmes (module, session, nbJours) qui ne sont pas lié à ma session, mais je 
-            // dois changer le nbJours de l'entité Programme que j'ajoute à ma session
-            
-
-        dd($qb);
+        // renvoyer le résultat
+        $query = $sub->getQuery();
+        return $query->getResult();
     }
 
 
