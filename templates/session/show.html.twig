@@ -13,6 +13,9 @@
                 <th class="bg-primary text-white">Catégorie</th>
                 <th class="bg-primary text-white">Module</th>
                 <th class="bg-primary text-white">Durée en jours</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th class="bg-primary text-white"></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -21,6 +24,14 @@
                 <td class="bg-light">{{ programme.module.categorie }}</td>
                 <td class="fw-bold bg-light">{{ programme.module }}</td>
                 <td class="bg-light">{{ programme.nbJours }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="bg-light">
+                        <a href="{{ path('remove_module_from_session', {'id' : programme.id, 'sessionId' : session.id}) }}">
+                            <i class="fa-solid fa-trash"></i>    
+                            Supprimer de la session
+                        </a>
+                    </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -28,26 +39,24 @@
     
     <h2>Stagiaire(s) inscrit(s) à la session (total: {{session.stagiaires|length}})</h2>
         
-    <table>
+    <table class="table w-25 text-center table-responsive">
         {% for stagiaire in session.stagiaires %}
-            <tr>
-                <td class="text-decoration-none">
-                    <a href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</a>
+            <tr class="bg-light">
+                <td>
+                    <a class="text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</a>
                 </td>
                 {% if is_granted('ROLE_ADMIN') %}
                     <td>
-                        <a href="{{ path('remove_stagiaire_from_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">Supprimer de la session</a>
+                        <a class="text-decoration-none" href="{{ path('remove_stagiaire_from_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">Supprimer de la session</a>
                     </td>
                 {% endif %}
             </tr>
-    {% endfor %}
+        {% endfor %}
     </table>
+
     {% if is_granted('ROLE_ADMIN') %}
-    <h2>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h2>
-    <table class="table w-25 text-center table-responsive">
-        <thead>
-        </thead>
-        <tbody>
+        <h2>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h2>
+        <table class="table w-25 text-center table-responsive">
             {% for stagiaire in stagiairesNonInscrits %}
                 <tr class="bg-light">
                     <td>
@@ -63,8 +72,30 @@
                     </td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
+        </table>
+
+        <h2>Module ajoutables (total: {{modulesNonUtilisés|length}})</h2>        
+        <table class="table w-50 text-center table-responsive">
+            <thead>
+            </thead>
+            <tbody>
+                {% for module in modulesNonUtilisés %}
+                    <tr class="bg-light">
+                        <td>
+                            {{ module }}
+                        </td>
+                        <td>
+                            <form action="{{ path('add_module_to_session', {'id' : session.id, 'idModule' : module.id}) }}" method="POST" autocomplete="off">
+                                <input class="form-control form-control-sm" type="number" name="nbJours" placeholder="Nombre de jours" min="0" required>
+                                <a href="{{ path('add_module_to_session', {'id' : session.id, 'idModule' : module.id}) }}">
+                                    <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Ajouter à la session">
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
 
 {% endblock %}
