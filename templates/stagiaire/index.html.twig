@@ -15,7 +15,6 @@
                 {# si l'utilisateur est admin #}
                 {% if is_granted('ROLE_ADMIN') %}
                     <th class="bg-primary text-white"></th>
-                    <th class="bg-primary text-white"></th>
                 {% endif %}
             </tr>
         </thead>
@@ -32,10 +31,6 @@
                 <td class="bg-light">{{ stagiaire.ville }}</td>
                 {# si l'utilisateur est admin #}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <td class="bg-light">
-                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
-                    </td>
-
                     <td class="bg-light">
                         <a class="text-danger" href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">
                             <i class="fa-solid fa-trash"></i>
