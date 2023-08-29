@@ -1,0 +1,20 @@
+#details,
+#stagiaires-inscrits,
+#admin-details,
+#modules-noninscrits {
+    margin: 2.5% 0;
+}
+
+#details {
+    margin-top:0;
+}
+
+#stagiaires-inscrits table,
+#stagiaires-noninscrits table{
+    width:25%;
+}
+
+#modules-noninscrits form {
+    display: flex;
+    width: 33%;
+}
