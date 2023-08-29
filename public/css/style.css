@@ -1,0 +1,49 @@
+* {
+	font-family: Poppins, Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+main {
+    padding:2.5%;
+}
+
+
+/* --------------------------------------------------------------------------- */
+/* NAV ----------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
+
+nav {   
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #cce1f2;
+}
+
+nav a {
+    color: #121d27;
+    text-decoration: none;
+    transition: .3s;
+}
+
+nav div:first-of-type a:first-of-type {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+nav a:not(nav div:first-of-type a:first-of-type):hover {
+    opacity: 70%;
+}
+
+/* div:first-of-type = nav links */
+/* div:nth-of-type(2) = auth links */
+nav div:first-of-type,
+nav div:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    gap:2rem;
+}
+
+/* --------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------- */
