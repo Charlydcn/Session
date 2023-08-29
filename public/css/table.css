@@ -1,0 +1,62 @@
+table:first-of-type {
+    border-spacing: 0;
+    background-color: #eff5fc;
+    width: 66%;
+}
+
+thead th,
+table td {
+    padding: .5rem 1rem;
+    font-weight: normal;
+    text-align: start;
+}
+
+thead {
+    background-color: #7f91aa;
+    color: white;
+}
+
+table a {
+    text-decoration: none;
+    color:unset;
+}
+
+.formation {
+    background-color: #466373;
+}
+
+.formation a {
+    color: white;
+    font-size: 14px;
+}
+
+.show-btn,
+.delete-btn {
+    color: #2b3c46;
+    transition: .3s;
+}
+
+.show-btn:hover {
+    opacity: 70%;
+}
+
+.delete-btn:hover {
+    color:rgb(179, 42, 42);
+}
+
+.new-btn {
+    text-align: center;
+}
+
+.new-btn a {
+    color:#2b3c46;
+    transition: .3s;
+}
+
+.new-btn a:hover {
+    color:#587e92;
+}
+
+.fa-list-ul {
+    font-size: 20px;
+}
