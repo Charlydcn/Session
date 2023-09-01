@@ -22,7 +22,7 @@ class Module
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'module', targetEntity: Programme::class)]
+    #[ORM\OneToMany(mappedBy: 'module', targetEntity: Programme::class, cascade: ['persist', 'remove'])]
     private Collection $programmes;
 
     public function __construct()
