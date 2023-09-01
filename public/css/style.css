@@ -9,6 +9,30 @@ main {
     padding:2.5%;
 }
 
+input:focus {
+    outline: none;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+h2 {
+    margin-bottom: 0.5rem;
+}
+
+/* look like a font-weight: bold; transition on text of this class */
+.text-hover:hover {
+    text-shadow:
+        -0.3px -0.3px 0 currentColor,
+        0.3px -0.3px 0 currentColor,
+        -0.3px 0.3px 0 currentColor,
+        0.3px 0.3px 0 currentColor;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+}
 
 /* --------------------------------------------------------------------------- */
 /* NAV ----------------------------------------------------------------------- */
@@ -18,7 +42,7 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    background-color: #cce1f2;
+    background-color: #e3f0ff;
 }
 
 nav a {
