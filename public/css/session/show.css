@@ -1,20 +1,33 @@
-#details,
+#prog-and-stags {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+#programmes h1 ~ a {
+    font-size: 16px;
+    text-decoration: none;
+    color:unset;
+}
+
 #stagiaires-inscrits,
 #admin-details,
 #modules-noninscrits {
     margin: 2.5% 0;
 }
 
-#details {
-    margin-top:0;
+#programmes table {
+    width:unset;
 }
 
-#stagiaires-inscrits table,
-#stagiaires-noninscrits table{
-    width:25%;
+#stagiaires table {
+    width: 100%;
 }
 
 #modules-noninscrits form {
     display: flex;
     width: 33%;
+    gap: 1rem;
+    align-items: center;
 }

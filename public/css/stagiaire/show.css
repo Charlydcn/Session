@@ -1,0 +1,22 @@
+#infos {
+    background-color: aliceblue;
+    padding: 1rem 2rem;
+}
+
+h1 + ul,
+h2 + ul {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+h2 + ul li a {
+    color: unset;
+    text-decoration: none;
+}
+
+h1 + ul li span {
+    font-weight: bold;
+}
