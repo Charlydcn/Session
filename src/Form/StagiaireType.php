@@ -21,40 +21,37 @@ class StagiaireType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'placeholder' => 'Dupont'
                 ]
             ])
             
             ->add('prenom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'placeholder' => 'Jeanne'
                 ]
             ])
 
             ->add('courriel', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'placeholder' => 'dupont.jeanne@exemple.fr'
                 ]
             ])
 
             ->add('dateNaissance', BirthdayType::class, [
                 'required' => false,
                 "widget" => "single_text",
-                'attr' => [
-                    'class' => 'form-control'
-                ]
             ])
 
             ->add('ville', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'placeholder' => 'Strasbourg, Colmar..'
                 ]
             ])
 
             ->add('telephone', TelType::class, [
                 'attr' => [
-                    'class' => 'form-control',
                     'maxlength' => 15,
+                    'placeholder' => '0612345678'
                 ],
                 'constraints' => [
                     new Length(['min' => 10, 'max' => 15]),
@@ -69,11 +66,7 @@ class StagiaireType extends AbstractType
                 ],
             ])
 
-            ->add('Valider', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-success'
-                ]
-            ])
+            ->add('Valider', SubmitType::class)
         ;
     }
 

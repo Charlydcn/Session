@@ -20,9 +20,22 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('pseudo', TextType::class)
+            ->add('email', EmailType::class, [
+                "label" => "E-Mail : ",
+                "attr" => [
+                    "placeholder" => "dupont.jeanne@exemple.fr",
+                ]
+            ])
+            
+            ->add('pseudo', TextType::class, [
+                "label" => "Pseudo : ",
+                "attr" => [
+                    "placeholder" => "pseudoExemple",
+                ]
+            ])
+
             ->add('agreeTerms', CheckboxType::class, [
+                "label" => "Accepter les CGU",
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -37,10 +50,19 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'Les mots de passe de correspondent pas.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmation mot de passe'],
-                ]
-            );
+                'first_options'  => [
+                    'label' => 'Mot de passe : ',
+                    "attr" => [
+                        "placeholder" => "••••••••",
+                        ]
+                    ],
+                'second_options' => [
+                    'label' => 'Confirmation mot de passe : ',
+                    "attr" => [
+                        "placeholder" => "••••••••",
+                        ]
+                    ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
