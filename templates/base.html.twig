@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+        {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
@@ -15,32 +15,98 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
-
-            <a class="navbar-brand" href="#">Session</a>
-
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="{{ path('app_home') }}">Accueil</a>
-                    <a class="nav-item nav-link" href="{{ path('app_session') }}">Sessions</a>
-                    <a class="nav-item nav-link" href="{{ path('app_formation') }}">Formations</a>
-                    <a class="nav-item nav-link" href="{{ path('app_stagiaire') }}">Stagiaires</a>
-
-                    {% if app.user %}
-                    {# si il y a un utilisateur connecté #}
-                    <a class="nav-item nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
-                    <a class="nav-item nav-link">Connecté en que <span class="fw-bold text-dark">{{ app.user }}</span></a>
-                    {% else %}
-                    {# si il n'y a aucun utilisateur connecté #}
-                    <a class="nav-item nav-link" href="{{ path('app_login') }}">Se connecter</a>
-                    <a class="nav-item nav-link" href="{{ path('app_register') }}">S'inscrire</a>
-                    {% endif %}
-                </div>
+        <nav>
+            <!-- RESPONSIVE NAV -->
+            <div id="open-btn">
+                <span></span>
             </div>
 
+            <a href="">Session</a>
+
+            <!-- user login/register/details -->
+            <div id="user-nav">
+                {% if app.user %}
+                    <i class="fas fa-user"></i>
+                    {{ app.user }}
+                {% else %}
+                    <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+                {% endif %}
+            {# <?php
+                if (App\Session::getUser()) {
+                ?>
+
+                    <a href="index.php?ctrl=forum&action=userDetails&id=<?= App\Session::getUser()->getId() ?>"><i class="fas fa-user"></i></a>
+                    <a href="index.php?ctrl=security&action=logOff&id=<?= App\Session::getUser()->getId() ?>">Log off</a>
+
+                <?php
+                } else {
+                ?>
+                    <a href="index.php?ctrl=security&action=displayLogin"><i class="fas fa-user"></i></a>
+
+                <?php } ?> #}
+            </div>
+
+            <div id="nav-left">
+                <a href="#">Session</a>
+                <a href="{{ path('app_home') }}">Accueil</a>
+                <a href="{{ path('app_session') }}">Sessions</a>
+                <a href="{{ path('app_formation') }}">Formations</a>
+                <a href="{{ path('app_stagiaire') }}">Stagiaires</a>
+            </div>
+
+            <div id="nav-right">
+                {% if app.user %}
+                    {# si il y a un utilisateur connecté #}
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    <a>Connecté en que <span class="fw-bold text-dark">{{ app.user }}</span></a>
+                {% else %}
+                    {# si il n'y a aucun utilisateur connecté #}
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                    <a href="{{ path('app_register') }}">S'inscrire</a>
+                {% endif %}
+            </div>
           </nav>
 
-        {% block body %}
-        {% endblock %}
+          <div id="nav-menu">
+            <h1>FORUM</h1>
+            <ul>
+                <li><a href="index.php?ctrl=home">Home</a></li>
+                <?php
+                if (App\Session::isAdmin()) {
+                ?>
+                    <li><a href="index.php?ctrl=forum&action=listUsers">Users</a></li>
+
+                <?php } ?>
+                <li><a href="index.php?ctrl=forum&action=listCategories">Categories</a></li>
+                <li><a href="index.php?ctrl=forum&action=listTopics">Topics</a></li>
+            </ul>
+        </div>
+        
+          <main>
+              {% block body %}
+              {% endblock %}
+          </main>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+        </script>
+        <script src="{{ asset('js/script.js') }}"></script>
+
+
+        <script>
+            $(document).ready(function() {
+                $(".message").each(function() {
+                    if ($(this).text().length > 0) {
+                        $(this).slideDown(500, function() {
+                            $(this).delay(3000).slideUp(500);
+                        });
+                    }
+                });
+        
+                $(".delete-btn").on("click", function() {
+                    return confirm("Etes-vous sûr de vouloir supprimer?");
+                });
+            });
+        </script>
+        
     </body>
 </html>
