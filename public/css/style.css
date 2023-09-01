@@ -34,9 +34,36 @@ h2 {
         transition: all .3s;
 }
 
+/* <tr> faisant guises de liens à la place des anciennes balises <a> */
+.row-link {
+    cursor:pointer;
+}
+
+.row-link:hover {
+    opacity: 85%;
+}
+
+/* les petits liens "Déjà inscris ? Connectez-vous" et l'inverse pour s'inscrire depuis log in */
+.security-redirect a {
+    text-decoration: none;
+    color:unset;
+}
+
+/* champs liés au places, souvent des <td> */
+.places {
+    text-align: end;
+}
 /* --------------------------------------------------------------------------- */
 /* NAV ----------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
+
+/* responsive nav */
+#user-nav,
+#nav-menu,
+#open-btn,
+#open-btn + a {
+	display:none;
+}
 
 nav {   
     display: flex;
@@ -51,19 +78,19 @@ nav a {
     transition: .3s;
 }
 
-nav div:first-of-type a:first-of-type {
+#nav-left a:first-of-type {
     font-weight: bold;
     font-size: 2rem;
 }
 
-nav a:not(nav div:first-of-type a:first-of-type):hover {
+nav a:not(#nav-left a:first-of-type):hover {
     opacity: 70%;
 }
 
 /* div:first-of-type = nav links */
 /* div:nth-of-type(2) = auth links */
-nav div:first-of-type,
-nav div:nth-of-type(2) {
+#nav-left,
+#nav-right {
     display: flex;
     align-items: center;
     gap:2rem;
@@ -71,3 +98,145 @@ nav div:nth-of-type(2) {
 
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
+@media screen and (max-width: 480px) {
+	* {
+		color:blue !important;
+	}
+  }
+/* responsive nav */
+@media screen and (max-width:768px) {
+
+	* {
+		color:red;
+	}
+	nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: #4663a5;
+		padding: 5%;
+	}
+	
+	nav a {
+		color: #ffffff;
+	}
+
+	#open-btn + a {
+		font-size: 26px;
+	}
+	
+	#nav-left,
+	#nav-right {
+		display: none;
+	}
+
+	#user-nav,
+	#nav-menu,
+	#open-btn,
+	#open-btn + a {
+		display:block;
+	}
+	
+	#open-btn {
+		cursor: pointer;
+		height: 27px;
+		width: 27px;
+		overflow: visible;
+		position: relative;
+		z-index: 3;
+	}
+	#open-btn span,
+	#open-btn span:before,
+	#open-btn span:after {
+		background: #ffffff;
+		display: block;
+		height: 4px;
+		opacity: 1;
+		position: absolute;
+		transition: 0.3s ease-in-out;
+	}
+	#open-btn span:before,
+	#open-btn span:after {
+		content: "";
+	}
+	#open-btn span {
+		right: 0px;
+		top: 13px;
+		width: 27px;
+	}
+	#open-btn span:before {
+		left: 0px;
+		top: -10px;
+		width: 27px;
+	}
+	#open-btn span:after {
+		left: 0px;
+		top: 10px;
+		width: 27px;
+	}
+	
+	#open-btn.close span {
+		transform: rotate(-45deg);
+		top: 13px;
+		width: 27px;
+	}
+	#open-btn.close span:before {
+		top: 0px;
+		transform: rotate(90deg);
+		width: 27px;
+	}
+	#open-btn.close span:after {
+		top: 0px;
+		left: 0;
+		transform: rotate(90deg);
+		opacity: 0;
+		width: 0;
+	}
+	
+	#user-nav {
+		display: inline-flex;
+		gap: 1rem;
+	}
+	
+	#user-nav a {
+		font-size:18px;
+	}
+	
+	#nav-menu {
+		z-index: 2;
+		min-width: 100%;
+		min-height: 100%;
+		position: fixed;
+		top: 0;
+		height: 0;
+		visibility: hidden;
+		opacity: 0;
+		text-align: center;
+		transition: all 0.3s ease-in-out;
+		padding: 0;
+	}
+	
+	#nav-menu.overlay {
+		visibility: visible;
+		opacity: 1;
+		padding-top: 100px;
+		background: rgba(0, 0, 0, 0.78);
+	}
+	
+	#nav-menu h1 {
+		color: white;
+		font-size: 56px;
+		margin-bottom: 15%;
+	}
+	
+	#nav-menu li {
+		list-style: none;
+	}
+	#nav-menu a {
+		color: white;
+		display: block;
+		font-size: 32px;
+		margin-bottom: 30px;
+		text-decoration: none;
+	}
+}
