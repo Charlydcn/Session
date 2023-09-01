@@ -1,12 +1,11 @@
-table:first-of-type {
+table {
     border-spacing: 0;
     background-color: #eff5fc;
-    width: 66%;
 }
 
 thead th,
 table td {
-    padding: .5rem 1rem;
+    padding: .5rem 2rem;
     font-weight: normal;
     text-align: start;
 }
@@ -19,13 +18,22 @@ thead {
 table a {
     text-decoration: none;
     color:unset;
+    transition: .3s;
+}
+
+tr {
+    transition: .3s;
+}
+
+.tablerow-hover:hover {
+    background-color: #c1d2e5;
 }
 
 .formation {
     background-color: #466373;
 }
 
-.formation a {
+.formation td {
     color: white;
     font-size: 14px;
 }
@@ -33,7 +41,6 @@ table a {
 .show-btn,
 .delete-btn {
     color: #2b3c46;
-    transition: .3s;
 }
 
 .show-btn:hover {
@@ -46,15 +53,12 @@ table a {
 
 .new-btn {
     text-align: center;
+    background-color: #d2def0;
 }
 
 .new-btn a {
-    color:#2b3c46;
+    color:#151515;
     transition: .3s;
-}
-
-.new-btn a:hover {
-    color:#587e92;
 }
 
 .fa-list-ul {
