@@ -60,14 +60,15 @@ h2 {
 /* responsive nav */
 #user-nav,
 #nav-menu,
-#open-btn,
-#open-btn + a {
+#openBtn,
+#openBtn + a {
 	display:none;
 }
 
 nav {   
     display: flex;
     justify-content: space-between;
+	flex-wrap: wrap;
     padding: 1rem;
     background-color: #e3f0ff;
 }
@@ -78,7 +79,11 @@ nav a {
     transition: .3s;
 }
 
-#nav-left a:first-of-type {
+nav ul {
+	list-style-type: none;
+}
+
+#nav-left li:first-of-type a {
     font-weight: bold;
     font-size: 2rem;
 }
@@ -98,30 +103,26 @@ nav a:not(#nav-left a:first-of-type):hover {
 
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
-@media screen and (max-width: 480px) {
-	* {
-		color:blue !important;
-	}
-  }
-/* responsive nav */
-@media screen and (max-width:768px) {
 
-	* {
-		color:red;
+@media screen and (max-width:768px) { /* tablet */
+
+	h1 {
+		font-size: 1.5em;
 	}
+
+	h2 {
+		font-size: 1em;
+	}
+
 	nav {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background: #4663a5;
+		background: #e3f0ff;
 		padding: 5%;
 	}
-	
-	nav a {
-		color: #ffffff;
-	}
 
-	#open-btn + a {
+	#openBtn + a {
 		font-size: 26px;
 	}
 	
@@ -132,12 +133,12 @@ nav a:not(#nav-left a:first-of-type):hover {
 
 	#user-nav,
 	#nav-menu,
-	#open-btn,
-	#open-btn + a {
+	#openBtn,
+	#openBtn + a {
 		display:block;
 	}
 	
-	#open-btn {
+	#openBtn {
 		cursor: pointer;
 		height: 27px;
 		width: 27px;
@@ -145,52 +146,61 @@ nav a:not(#nav-left a:first-of-type):hover {
 		position: relative;
 		z-index: 3;
 	}
-	#open-btn span,
-	#open-btn span:before,
-	#open-btn span:after {
-		background: #ffffff;
+	#openBtn span,
+	#openBtn span:before,
+	#openBtn span:after {
+		border-radius: 5px;
+		background: #000000;
 		display: block;
 		height: 4px;
 		opacity: 1;
 		position: absolute;
 		transition: 0.3s ease-in-out;
 	}
-	#open-btn span:before,
-	#open-btn span:after {
+
+	#openBtn span:before,
+	#openBtn span:after {
 		content: "";
 	}
-	#open-btn span {
+	#openBtn span {
 		right: 0px;
 		top: 13px;
 		width: 27px;
 	}
-	#open-btn span:before {
+	#openBtn span:before {
 		left: 0px;
 		top: -10px;
 		width: 27px;
 	}
-	#open-btn span:after {
+	#openBtn span:after {
 		left: 0px;
 		top: 10px;
 		width: 27px;
 	}
 	
-	#open-btn.close span {
+	#openBtn.close span {
 		transform: rotate(-45deg);
 		top: 13px;
 		width: 27px;
 	}
-	#open-btn.close span:before {
+	#openBtn.close span:before {
 		top: 0px;
 		transform: rotate(90deg);
 		width: 27px;
 	}
-	#open-btn.close span:after {
+	#openBtn.close span:after {
 		top: 0px;
 		left: 0;
 		transform: rotate(90deg);
 		opacity: 0;
 		width: 0;
+	}
+
+	#openBtn.close span,
+	#openBtn.close span:before,
+	#openBtn.close span:after {
+		background-color: #fff;
+		border-radius: 5px;
 	}
 	
 	#user-nav {
