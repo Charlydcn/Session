@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -24,13 +23,21 @@ class RegistrationFormType extends AbstractType
                 "label" => "E-Mail : ",
                 "attr" => [
                     "placeholder" => "dupont.jeanne@exemple.fr",
-                ]
+                ],
             ])
             
             ->add('pseudo', TextType::class, [
                 "label" => "Pseudo : ",
                 "attr" => [
                     "placeholder" => "pseudoExemple",
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre pseudo ne peut pas être inférieur à 3 caractères',
+                        'max' => 20,
+                        'maxMessage' => 'Votre pseudo ne peut pas excéder 20 caractères',
+                    ])
                 ]
             ])
 
@@ -39,16 +46,16 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => "Merci d'accepter les règles générales d'utilisation",
                         ]
                     ),
                 ],
             ])
             ->add('password', RepeatedType::class, [
                 'mapped' => false,
+                "help" => "8-25 caractères",
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe de correspondent pas.',
-                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => [
                     'label' => 'Mot de passe : ',
@@ -62,7 +69,16 @@ class RegistrationFormType extends AbstractType
                         "placeholder" => "••••••••",
                         ]
                     ],
-            ]);
+                'constraints' => [
+                    new Length([
+                            'min' => 8,
+                            'minMessage' => 'Votre mot de passe doit contenir au moins 8 caractères',
+                            'max' => 15,
+                            'maxMessage' => 'Votre mot de passe ne peut pas excéder 15 caractères',
+                    ],
+                    )
+                ]
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
