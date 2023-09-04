@@ -2,37 +2,35 @@
 
 {% block title %}Stagiaires{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
+{% endblock %}
+
 {% block body %}
 
     <h1>Liste de stagiaires</h1>
 
-    <table class="table w-25 text-center table-responsive">
+    <table>
         <thead>
             <tr>
-                <th class="bg-primary text-white">Nom</th>
-                <th class="bg-primary text-white">Prénom</th>
-                <th class="bg-primary text-white">Ville</th>
+                <th colspan="2">Nom</th>
+                <th>Ville</th>
                 {# si l'utilisateur est admin #}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <th class="bg-primary text-white"></th>
+                    <th></th>
                 {% endif %}
             </tr>
         </thead>
         <tbody>
 
         {% for stagiaire in stagiaires %}
-            <tr>
-                <td class="bg-light">
-                    <a class="bg-light text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom }}</a>
-                </td>
-                <td class="bg-light">
-                    <a class="bg-light text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.prenom }}</a>
-                </td>
-                <td class="bg-light">{{ stagiaire.ville }}</td>
+            <tr class="tablerow-hover row-link" data-href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
+                <td colspan="2">{{ stagiaire.nom|upper ~ " " ~ stagiaire.prenom|capitalize }}</td>
+                <td>{{ stagiaire.ville }}</td>
                 {# si l'utilisateur est admin #}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <td class="bg-light">
-                        <a class="text-danger" href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">
+                    <td>
+                        <a class="delete-btn" href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </td>
@@ -43,11 +41,9 @@
         {# on affiche le bouton d'ajout de nouveau stagiaire si l'utilisateur est connecté et admin #}
         {% if is_granted('ROLE_ADMIN') %}
             <tr>
-                <td class="bg-light" colspan="5">
-                    <a class="text-decoration-none" href="{{ path('new_stagiaire') }}">
-                        <i class="fa-solid fa-plus"></i>
-                        Ajouter un nouveau stagiaire
-                    </a>
+                <td class="new-btn row-link" colspan="5" data-href="{{ path('new_stagiaire') }}">
+                    <i class="fa-solid fa-plus"></i>
+                    Ajouter un nouveau stagiaire
                 </td>
             </tr>
         {% endif %}
