@@ -29,15 +29,6 @@ tr {
     background-color: #c1d2e5;
 }
 
-.formation {
-    background-color: #466373;
-}
-
-.formation td {
-    color: white;
-    font-size: 14px;
-}
-
 .show-btn,
 .delete-btn {
     color: #2b3c46;
@@ -61,6 +52,27 @@ tr {
     transition: .3s;
 }
 
-.fa-list-ul {
-    font-size: 20px;
+@media screen and (max-width:768px) { /* tablet */
+
+    thead th,
+    table td {
+        padding: 1rem;
+    }
+
+}
+
+@media screen and (max-width:480px) { /* smartphone */
+
+    thead th,
+    table td {
+        padding: 0.5rem;
+    }
+
+    table th {
+        font-size: 14px;
+    }
+
+    table td {
+        font-size: 13px;
+    }
 }
