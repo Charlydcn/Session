@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Accueil {% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <h1>Bonjour {{ (app.user) ? app.user.pseudo : '' }}</h1>
+    <h1>Interface de gestion de sessions de formations</h1>
+
+    {% if app.user %}
+        <h2>Bonjour {{ app.user }}</h2> 
+    {% endif %}
 {% endblock %}
