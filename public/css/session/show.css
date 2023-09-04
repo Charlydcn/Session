@@ -1,6 +1,6 @@
 #prog-and-stags {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: flex-start;
     gap: 1rem;
 }
@@ -30,4 +30,41 @@
     width: 33%;
     gap: 1rem;
     align-items: center;
+}
+
+#modules-noninscrits input:first-of-type {
+    padding: 2.5px 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#modules-noninscrits form input:last-of-type {
+    padding: 2.5px 5px;
+    background-color: #7f91aa;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+@media screen and (max-width:1100px) {
+
+    #prog-and-stags {
+        flex-wrap: wrap;
+    }
+
+}
+
+@media screen and (max-width:768px) { /* tablet */
+
+    
+
+}
+
+@media screen and (max-width:480px) { /* smartphone */
+
+    
+
 }
