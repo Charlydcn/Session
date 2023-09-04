@@ -21,7 +21,7 @@
                 <span></span>
             </div>
 
-            <a href="">Session</a>
+            <a href="{{ path('app_home') }}">Session</a>
 
             <!-- user login/register/details -->
             <ul id="user-nav">
@@ -42,28 +42,27 @@
             </ul>
 
             <ul id="nav-left">
-                <li><a href="#">Session</a></li>
-                <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                <li><a href="{{ path('app_session') }}">Sessions</a></li>
-                <li><a href="{{ path('app_formation') }}">Formations</a></li>
-                <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
+                <li><a href="{{ path('app_home') }}">Session</a></li>
+                <li><a class="underline-hover" href="{{ path('app_home') }}">Accueil</a></li>
+                <li><a class="underline-hover" href="{{ path('app_session') }}">Sessions</a></li>
+                <li><a class="underline-hover" href="{{ path('app_formation') }}">Formations</a></li>
+                <li><a class="underline-hover" href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
             </ul>
 
             <ul id="nav-right">
                 {% if app.user %}
                     {# si il y a un utilisateur connecté #}
-                    <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                    <li><a class="underline-hover" href="{{ path('app_logout') }}">Se déconnecter</a></li>
                     <li><a>Connecté en que <span class="fw-bold text-dark">{{ app.user }}</span></a></li>
                 {% else %}
                     {# si il n'y a aucun utilisateur connecté #}
-                    <li><a href="{{ path('app_login') }}">Se connecter</a></li>
-                    <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                    <li><a class="underline-hover" href="{{ path('app_login') }}">Se connecter</a></li>
+                    <li><a class="underline-hover" href="{{ path('app_register') }}">S'inscrire</a></li>
                 {% endif %}
             </ul>
           </nav>
 
           <div id="nav-menu">
-            <h1>Session</h1>
             <ul>
                 <li><a href="{{ path('app_session') }}">Sessions</a></li>
                 <li><a href="{{ path('app_formation') }}">Formations</a></li>
