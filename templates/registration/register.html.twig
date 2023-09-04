@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/form.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1>Inscription</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -13,9 +17,15 @@
         {{ form_row(registrationForm.password, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div id="cgu">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">Inscription</button>
+
+        <p class="security-redirect">Déjà inscrit(e) ? <a class="text-hover" href="{{path('app_login')}}">Connectez-vous</a></p>
+
+        
     {{ form_end(registrationForm) }}
 
 {% endblock %}
