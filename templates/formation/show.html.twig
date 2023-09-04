@@ -2,32 +2,30 @@
 
 {% block title %}Détail formation{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
+{% endblock %}
+
 {% block body %}
 
     <h1>{{ formation }}</h1>
 
     <h2>Sessions</h2>
 
-    <table class="table w-50 text-center table-responsive">
+    <table>
         <thead>
             <tr>
-                <th colspan="2" class="bg-primary text-white">Date</th>
-                <th class="bg-primary text-white">Places</th>
-                <th class="bg-primary text-white">Places restantes</th>
-                <th class="bg-primary text-white">Détail</th>
+                <th colspan="2">Date</th>
+                <th>Places</th>
+                <th>Places restantes</th>
             </tr>
         </thead>
         <tbody>
             {% for session in formation.sessions %}
-            <tr>
-                <td colspan="2" ="bg-light">{{ session.getDate }}</td>
-                <td class="bg-light">{{ session.nbPlaces }}</td>
-                <td class="bg-light">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
-                <td class="bg-light">
-                    <a class="text-decoration-none" href="{{ path('show_session', {'id' : session.id}) }}">
-                        <i class="fa-solid fa-list-ul"></i>
-                    </a>
-                </td>
+            <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">
+                <td colspan="2">{{ session.getDate }}</td>
+                <td class="places">{{ session.nbPlaces }}</td>
+                <td class="places">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
             </tr>
             {% endfor %}
         </tbody>
