@@ -7,18 +7,34 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Inscription</h1>
 
-    {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.password, {
-            label: 'Password'
-        }) }}
+{{ form_start(registrationForm) }}
+        
+        
+        <h1>Inscription</h1>
+
+        <div>
+            {{ form_label(registrationForm.email) }}
+            <div class="error">{{ form_errors(registrationForm.email) }}</div>
+            {{ form_widget(registrationForm.email) }}
+        </div>
+
+        <div>
+            {{ form_label(registrationForm.pseudo) }}
+            <div class="error">{{ form_errors(registrationForm.pseudo) }}</div>
+            {{ form_widget(registrationForm.pseudo) }}
+        </div>
+
+        <div>
+            <div class="error">{{ form_errors(registrationForm.password) }}</div>
+            {{ form_widget(registrationForm.password) }}
+        </div>
+
         <div id="cgu">
-            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms) }}
+            <div class="error">{{ form_errors(registrationForm.agreeTerms) }}</div>
+            {{ form_widget(registrationForm.agreeTerms) }}
         </div>
 
         <button type="submit" class="btn">Inscription</button>
