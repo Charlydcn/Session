@@ -64,10 +64,37 @@ form select {
     border-radius: 4px;
 }
 
-#cgu div {
+#cgu {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+@media screen and (max-width:768px) { /* tablet */
+
+    form h1 {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:480px) { /* smartphone */    
+
+    form label {
+        font-size: 14px;
+    }
+
+    form input {
+        font-size: 12px;
+    }
+
+    form button[type="submit"] {
+        padding:7.5px;
+    }
+
+    .security-redirect {
+        font-size: 12px;
+    }
+
 }
 
