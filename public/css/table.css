@@ -76,3 +76,19 @@ tr {
         font-size: 13px;
     }
 }
+
+@media screen and (max-width:320px) { /* smartphone-- */
+
+    thead th,
+    table td {
+        padding: 0;
+    }
+
+    table th {
+        font-size: 13px;
+    }
+
+    table td {
+        font-size: 12px;
+    }
+}
