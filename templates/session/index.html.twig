@@ -29,8 +29,8 @@
                 {% for session in formation.sessions %}
                 <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">
                     <td colspan="2">{{session.getDate}}</td>
-                    <td class="places">{{ session.nbPlaces }}</td>
-                    <td class="places">{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
+                    <td>{{ session.nbPlaces }}</td>
+                    <td>{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
                     {% if is_granted('ROLE_ADMIN') %}
                         <td>
                             <a class="delete-btn" href="{{ path('delete_session', {'id': session.id}) }}">
