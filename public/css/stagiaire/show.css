@@ -17,6 +17,26 @@ h2 + ul li a {
     text-decoration: none;
 }
 
+h2 + ul li a:last-of-type {
+    font-size: 14px;
+    opacity: 80%;
+}
+
 h1 + ul li span {
     font-weight: bold;
+}
+
+@media screen and (max-width:480px) { /* smartphone */
+
+    h1 + ul li a {
+        font-size: 14px;
+    }
+
+    h2 + ul li a:last-of-type{
+        font-size: 12px;
+    }
+
+    h1 + ul li {
+        font-size: 12px;
+    }
 }
