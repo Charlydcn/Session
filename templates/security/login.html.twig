@@ -9,6 +9,10 @@
 {% block body %}
 <form method="post">
 
+    <div class="error">
+        <p>{{ error ? error.message : "" }}</p>
+    </div>
+
     <h1>Connexion : </h1>
     <label for="inputEmail">Email : </label>
     <input type="email" value="{{ last_username }}" placeholder="dupont.jeanne@exemple.fr" name="email" id="inputEmail" autocomplete="email" required autofocus>
