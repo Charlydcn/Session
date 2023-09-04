@@ -2,30 +2,30 @@
 
 {% block title %}Formations{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/formation/index.css') }}">
+{% endblock %}
+
 {% block body %}
 
     <h1>Liste des formations</h1>
-    <table class="table w-25 text-center table-responsive">
+    <table>
         <thead>
             <tr>
-                <th class="bg-primary text-white">Intitulé</th>
-                <th class="bg-primary text-white">Nombre de sessions </th>
+                <th>Intitulé</th>
+                <th>Nombre de sessions</th>
             </tr>
         </thead>
         <tbody>
-
-        {% for formation in formations %}
-            <tr>
-                <td class="bg-light">
-                    <a class="text-decoration-none" href="{{ path('show_formation', {'id' : formation.id}) }}">{{ formation }}</a>
-                </td>
-                <td class="bg-light text-decoration-none">
-                    {{ formation.sessions|length }}
-                </td>
-            </tr>
-        {% endfor %}
-        
+            {% for formation in formations %}
+                {# data-href="" = href pour tout les éléments en js #}
+                <tr class="tablerow-hover row-link" data-href="{{ path('show_formation', {'id' : formation.id}) }}">
+                    <td>{{ formation }}</td>
+                    <td>{{ formation.sessions|length }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
+    
 {% endblock %}
