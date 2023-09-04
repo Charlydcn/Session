@@ -2,30 +2,36 @@
 
 {% block title %}Détail stagiaire{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/stagiaire/show.css') }}">
+{% endblock %}
+
 {% block body %}
-
-    <h1>{{ stagiaire }}</h1>
-    <ul>
-        <li><span>Nom :</span> {{ stagiaire.nom }}</li>
-        <li><span>Prénom :</span> {{ stagiaire.prenom }}</li>
-        <li><span>Courriel :</span> {{ stagiaire.courriel }}</li>
-        <li><span>Âge :</span> {{ stagiaire.dateNaissance ? stagiaire.getAge ~ " ans" : "Non renseigné"}}</li>
-        <li><span>Ville :</span> {{ stagiaire.ville }}</li>
-        <li><span>Téléphone :</span> {{ stagiaire.telephone }}</li>
-        <li><span>Sexe :</span> {{ stagiaire.sexe ? stagiaire.sexe : "Non renseigné" }}</li>
-    </ul>
-
-    {% if stagiaire.sessions %}
-        <h2>Sessions inscrites</h2>
+    <div id="infos">
+        <h1>{{ stagiaire }}</h1>
+        
         <ul>
-            {% for session in stagiaire.sessions %}
-                <li>
-                    <a class="text-decoration-none" href="{{ path('show_session', {'id' : session.id}) }}">{{session.getDate}}</a>
-                    <a class="text-dark text-decoration-none" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{ session.formation }})</a>
-                </li>
-            {% endfor %}
-        </ul>  
-    {% endif %}
+            <li><span>Nom :</span> {{ stagiaire.nom }}</li>
+            <li><span>Prénom :</span> {{ stagiaire.prenom }}</li>
+            <li><span>Courriel :</span> {{ stagiaire.courriel }}</li>
+            <li><span>Âge :</span> {{ stagiaire.dateNaissance ? stagiaire.getAge ~ " ans" : "Non renseigné"}}</li>
+            <li><span>Ville :</span> {{ stagiaire.ville }}</li>
+            <li><span>Téléphone :</span> {{ stagiaire.telephone }}</li>
+            <li><span>Sexe :</span> {{ stagiaire.sexe ? stagiaire.sexe : "Non renseigné" }}</li>
+        </ul>
+        {% if stagiaire.sessions %}
+            <h2>Sessions inscrites</h2>
+            <ul>
+                {% for session in stagiaire.sessions %}
+                    <li>
+                        <a class="text-hover" href="{{ path('show_session', {'id' : session.id}) }}">{{session.getDate}}</a>
+                        <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{ session.formation }})</a>
+                    </li>
+                {% endfor %}
+            </ul>  
+        {% endif %}
+    </div>
+
 
 
 {% endblock %}
