@@ -17,68 +17,57 @@
 
         <nav>
             <!-- RESPONSIVE NAV -->
-            <div id="open-btn">
+            <div id="openBtn">
                 <span></span>
             </div>
 
             <a href="">Session</a>
 
             <!-- user login/register/details -->
-            <div id="user-nav">
+            <ul id="user-nav">
+
                 {% if app.user %}
-                    <i class="fas fa-user"></i>
-                    {{ app.user }}
+                    <li>
+                        <a href="{{ path('app_logout') }}">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </a>
+                    </li>
                 {% else %}
-                    <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+                    <li>
+                        <a href="{{ path('app_login') }}">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
                 {% endif %}
-            {# <?php
-                if (App\Session::getUser()) {
-                ?>
+            </ul>
 
-                    <a href="index.php?ctrl=forum&action=userDetails&id=<?= App\Session::getUser()->getId() ?>"><i class="fas fa-user"></i></a>
-                    <a href="index.php?ctrl=security&action=logOff&id=<?= App\Session::getUser()->getId() ?>">Log off</a>
+            <ul id="nav-left">
+                <li><a href="#">Session</a></li>
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li><a href="{{ path('app_session') }}">Sessions</a></li>
+                <li><a href="{{ path('app_formation') }}">Formations</a></li>
+                <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
+            </ul>
 
-                <?php
-                } else {
-                ?>
-                    <a href="index.php?ctrl=security&action=displayLogin"><i class="fas fa-user"></i></a>
-
-                <?php } ?> #}
-            </div>
-
-            <div id="nav-left">
-                <a href="#">Session</a>
-                <a href="{{ path('app_home') }}">Accueil</a>
-                <a href="{{ path('app_session') }}">Sessions</a>
-                <a href="{{ path('app_formation') }}">Formations</a>
-                <a href="{{ path('app_stagiaire') }}">Stagiaires</a>
-            </div>
-
-            <div id="nav-right">
+            <ul id="nav-right">
                 {% if app.user %}
                     {# si il y a un utilisateur connecté #}
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    <a>Connecté en que <span class="fw-bold text-dark">{{ app.user }}</span></a>
+                    <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                    <li><a>Connecté en que <span class="fw-bold text-dark">{{ app.user }}</span></a></li>
                 {% else %}
                     {# si il n'y a aucun utilisateur connecté #}
-                    <a href="{{ path('app_login') }}">Se connecter</a>
-                    <a href="{{ path('app_register') }}">S'inscrire</a>
+                    <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                    <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
                 {% endif %}
-            </div>
+            </ul>
           </nav>
 
           <div id="nav-menu">
-            <h1>FORUM</h1>
+            <h1>Session</h1>
             <ul>
-                <li><a href="index.php?ctrl=home">Home</a></li>
-                <?php
-                if (App\Session::isAdmin()) {
-                ?>
-                    <li><a href="index.php?ctrl=forum&action=listUsers">Users</a></li>
-
-                <?php } ?>
-                <li><a href="index.php?ctrl=forum&action=listCategories">Categories</a></li>
-                <li><a href="index.php?ctrl=forum&action=listTopics">Topics</a></li>
+                <li><a href="{{ path('app_session') }}">Sessions</a></li>
+                <li><a href="{{ path('app_formation') }}">Formations</a></li>
+                <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
             </ul>
         </div>
         
