@@ -49,10 +49,10 @@ h2 {
     color:unset;
 }
 
-/* champs liés au places, souvent des <td> */
-.places {
-    text-align: end;
+.security-redirect {
+	margin: 1rem 0;
 }
+
 /* --------------------------------------------------------------------------- */
 /* NAV ----------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
@@ -88,8 +88,25 @@ nav ul {
     font-size: 2rem;
 }
 
-nav a:not(#nav-left a:first-of-type):hover {
-    opacity: 70%;
+/* hover effect underline */
+.underline-hover {
+	position: relative;
+}
+.underline-hover::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	background-color: #000000;
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+}
+.underline-hover:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 /* div:first-of-type = nav links */
@@ -101,17 +118,27 @@ nav a:not(#nav-left a:first-of-type):hover {
     gap:2rem;
 }
 
+/* messages d'erreurs sur les forms login/register */
+.error ul li,
+label + ul li,
+.error p {
+	font-size: 14px;
+    list-style: none;
+    color: #cf2a2a;
+    font-weight: bold;
+}
+
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 
 @media screen and (max-width:768px) { /* tablet */
 
 	h1 {
-		font-size: 1.5em;
+		font-size: 1.3rem;
 	}
 
 	h2 {
-		font-size: 1em;
+		font-size: .8rem;
 	}
 
 	nav {
@@ -233,20 +260,24 @@ nav a:not(#nav-left a:first-of-type):hover {
 		background: rgba(0, 0, 0, 0.78);
 	}
 	
-	#nav-menu h1 {
-		color: white;
-		font-size: 56px;
-		margin-bottom: 15%;
-	}
-	
 	#nav-menu li {
 		list-style: none;
 	}
+	
 	#nav-menu a {
 		color: white;
 		display: block;
 		font-size: 32px;
 		margin-bottom: 30px;
 		text-decoration: none;
+	}
+
+	.security-redirect {
+		font-size: 14px;
+		text-align: center;
+	}
+
+	.security-redirect a {
+		font-weight: bold;
 	}
 }
