@@ -1,101 +1,176 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Détail session{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/session/show.css') }}">
+{% endblock %}
 
 {% block body %}
+    <div id="prog-and-stags">
 
-    <h1>Session du {{ session.getDate }}</h1>
-    <h2><a class="text-dark text-decoration-none" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a></h2>
+        <div id="programmes">
+            <h1>
+                Session du {{ session.getDate }}
+            </h1>
+            <a href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
 
-    <table class="table w-50 text-center table-responsive">
-        <thead>
-            <tr>
-                <th class="bg-primary text-white">Catégorie</th>
-                <th class="bg-primary text-white">Module</th>
-                <th class="bg-primary text-white">Durée en jours</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <th class="bg-primary text-white"></th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for programme in session.programmes %}
-            <tr>
-                <td class="bg-light">{{ programme.module.categorie }}</td>
-                <td class="fw-bold bg-light">{{ programme.module }}</td>
-                <td class="bg-light">{{ programme.nbJours }}</td>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <td class="bg-light">
-                        <a href="{{ path('remove_module_from_session', {'id' : programme.id, 'sessionId' : session.id}) }}">
-                            <i class="fa-solid fa-trash"></i>    
-                            Supprimer de la session
-                        </a>
-                    </td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Module</th>
+                        <th>Durée en jours</th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <th></th>
+                        {% endif %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {# ------------------------------------------------------------------------------------------------ #}
+                    {# ------------------------------------------ Programmes ------------------------------------------ #}
+                    {% if session.programmes|length < 1 %}
+                        <tr>
+                            <td>Aucune session pour le moment</td>
+                        </tr>
+                        {% else %}
+                            {% for programme in session.programmes %}
+                            <tr class="tablerow-hover">
+                                <td>{{ programme.module.categorie }}</td>
+                                <td>{{ programme.module }}</td>
+                                <td>{{ programme.nbJours }}</td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <td>
+                                        <a class="delete-btn" href="{{ path('remove_module_from_session', {'id' : programme.id, 'sessionId' : session.id}) }}">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        {# ------------------------------------------------------------------------------------------------ #}
+        {# -------------------------------------- Stagiaires inscrits ------------------------------------- #}
+        <div id="stagiaires">
+
+            <div id="stagiaires-inscrits">                
+                <h3>Stagiaire(s) inscrit(s) à la session (total: {{session.stagiaires|length}})</h3> 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Ville</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th></th>
+                            {% endif %}
+                        </tr>
+                    </thead>
     
-    <h2>Stagiaire(s) inscrit(s) à la session (total: {{session.stagiaires|length}})</h2>
+                    <tbody>
+                        {% if session.stagiaires|length < 1 %}
+                            <tr>
+                                <td>Aucun stagiaire pour le moment</td>
+                            </tr>
+                        {% else %}
+                            {% for stagiaire in session.stagiaires %}
+                                <tr class="tablerow-hover row-link" data-href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
+                                    <td>{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</td>
+                                    <td>{{ stagiaire.ville }}</td>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <td>
+                                            <a class="delete-btn" href="{{ path('remove_stagiaire_from_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    
+                    </tbody>
+                </table>
+            </div>
+    
+    
+            {# ------------------------------------------------------------------------------------------------ #}
+            {# ----------------------------------- Stagiaires non inscrits ------------------------------------ #}
+    
+            {% if is_granted('ROLE_ADMIN') %}
         
-    <table class="table w-25 text-center table-responsive">
-        {% for stagiaire in session.stagiaires %}
-            <tr class="bg-light">
-                <td>
-                    <a class="text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</a>
-                </td>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <td>
-                        <a class="text-decoration-none" href="{{ path('remove_stagiaire_from_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">Supprimer de la session</a>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
+                <div id="stagiaires-noninscrits">
+                    <h3>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h3>
+    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Ville</th>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <th></th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% for stagiaire in stagiairesNonInscrits %}
+                                <tr class="tablerow-hover row-link" data-href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
+                                    <td>
+                                        {{ stagiaire.nom|upper ~ " " ~stagiaire.prenom|capitalize }}
+                                    </td>
+                                    <td>{{ stagiaire.ville }}</td>
+                                    <td>
+                                        <a class="text-hover" href="{{ path('add_stagiaire_to_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">
+                                            <i class="fa-solid fa-plus"></i>
+                                            Ajouter à la session
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <h2>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h2>
-        <table class="table w-25 text-center table-responsive">
-            {% for stagiaire in stagiairesNonInscrits %}
-                <tr class="bg-light">
-                    <td>
-                        <a class="text-decoration-none" href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
-                            {{ stagiaire.nom|upper ~ " " ~stagiaire.prenom|capitalize }}
-                        </a>
-                    </td>
-                    <td class="bg-light">
-                        <a class="text-decoration-none" href="{{ path('add_stagiaire_to_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">
-                            <i class="fa-solid fa-plus"></i>
-                            Ajouter à la session
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
+        </div>
+    </div>
 
-        <h2>Module ajoutables (total: {{modulesNonUtilisés|length}})</h2>        
-        <table class="table w-50 text-center table-responsive">
+    {# ------------------------------------------------------------------------------------------------ #}
+    {# -------------------------------------- Modules ajoutables -------------------------------------- #}
+
+
+    <div id="modules-noninscrits">
+        <h3>Module ajoutables (total: {{modulesNonUtilisés|length}})</h3>     
+
+        <table>
             <thead>
+                <tr>
+                    <th>Intitulé</th>
+                    <th>Nombre de jours</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 {% for module in modulesNonUtilisés %}
-                    <tr class="bg-light">
+                    <tr class="tablerow-hover">
                         <td>
                             {{ module }}
                         </td>
-                        <td>
+                        <td colspan="2">
                             <form action="{{ path('add_module_to_session', {'id' : session.id, 'idModule' : module.id}) }}" method="POST" autocomplete="off">
-                                <input class="form-control form-control-sm" type="number" name="nbJours" placeholder="Nombre de jours" min="0" required>
-                                <a href="{{ path('add_module_to_session', {'id' : session.id, 'idModule' : module.id}) }}">
-                                    <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Ajouter à la session">
-                                </a>
+                                <input type="number" name="nbJours" min="0" max="999" required>
+                        
+                                <input type="submit" name="submit" value="Ajouter" class="row-link" data-href="{{ path('add_module_to_session', {'id' : session.id, 'idModule' : module.id}) }}">
                             </form>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
     {% endif %}
 
 {% endblock %}
