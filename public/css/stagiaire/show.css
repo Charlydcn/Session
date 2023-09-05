@@ -28,15 +28,16 @@ h1 + ul li span {
 
 @media screen and (max-width:480px) { /* smartphone */
 
-    h1 + ul li a {
+    h1 + ul li span, /* = Nom: Prénom: Courriel: .. */
+    h2 + ul li a:first-of-type { /* = Dates des sessions ("20/02/2023 au 12/05/2023")  */
         font-size: 14px;
     }
 
-    h2 + ul li a:last-of-type{
+    h2 + ul li a:last-of-type{ /* = Formations entre parenthèses après les sessions (Développeur web et web mobile..) */
         font-size: 12px;
     }
 
-    h1 + ul li {
-        font-size: 12px;
+    h2 {
+        font-size: 1.1rem;
     }
 }
