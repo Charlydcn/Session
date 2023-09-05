@@ -1,6 +1,7 @@
 table {
     border-spacing: 0;
     background-color: #eff5fc;
+    overflow: hidden;
 }
 
 thead th,
@@ -11,7 +12,7 @@ table td {
 }
 
 thead {
-    background-color: #7b91b1;
+    background-color: #6b8bb8;
     color: white;
 }
 
@@ -21,7 +22,8 @@ table a {
     transition: .3s;
 }
 
-tr {
+tr,
+.delete-btn i {
     transition: .3s;
 }
 
@@ -29,18 +31,23 @@ tr {
     background-color: #c1d2e5;
 }
 
-.delete-btn:hover {
+.delete-btn:hover i {
     color:rgb(179, 42, 42);
+    transform: scale(1.1);
 }
 
 .new-btn {
     text-align: center;
-    background-color: #d2def0;
+    transition: .6s;
 }
 
 .new-btn a {
     color:#151515;
     transition: .3s;
+}
+
+.new-btn:hover {
+    transform: translate(5%);
 }
 
 @media screen and (max-width:768px) { /* tablet */
