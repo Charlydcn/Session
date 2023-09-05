@@ -100,7 +100,7 @@ nav ul {
 	height: 1px;
 	bottom: 0;
 	left: 0;
-	background-color: #000000;
+	background-color: currentColor;
 	transform-origin: bottom right;
 	transition: transform 0.25s ease-out;
 }
@@ -128,6 +128,10 @@ label + ul li,
     font-weight: bold;
 }
 
+.goback-link {
+	display:none;
+}
+
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 
@@ -138,9 +142,11 @@ label + ul li,
 	}
 
 	h2 {
-		font-size: .8rem;
+		font-size: 1rem;
 	}
 
+	/************************************************************************/
+	/* nav ******************************************************************/
 	nav {
 		display: flex;
 		justify-content: space-between;
@@ -271,7 +277,9 @@ label + ul li,
 		margin-bottom: 30px;
 		text-decoration: none;
 	}
+	/************************************************************************************/
 
+	/* les petits liens de redirect dans les forms d'authentification: register sur la vue login inversement */
 	.security-redirect {
 		font-size: 14px;
 		text-align: center;
@@ -279,5 +287,25 @@ label + ul li,
 
 	.security-redirect a {
 		font-weight: bold;
+	}
+
+	/* les petits liens de redirect en arrière */
+	.goback-link {
+		display:unset;
+		text-decoration: none;
+		color: unset;
+		font-size: 0.8rem;
+		opacity: 66%;
+	}
+
+	/* messages d'erreurs sur les forms login/register */
+	.error ul li,
+	label + ul li,
+	.error p {
+		font-size: 12px;
+		list-style: none;
+		color: #cf2a2a;
+		font-weight: bold;
+		padding:5px 0;
 	}
 }
