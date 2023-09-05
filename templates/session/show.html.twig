@@ -67,7 +67,7 @@
         <div id="stagiaires">
 
             <div id="stagiaires-inscrits">                
-                <h3>Stagiaire(s) inscrit(s) à la session (total: {{session.stagiaires|length}})</h3> 
+                <h2>Stagiaire(s) inscrit(s) à la session (total: {{session.stagiaires|length}})</h2> 
                 <table>
                     <thead>
                         <tr>
@@ -79,7 +79,7 @@
                     <tbody>
                         {% if session.stagiaires|length < 1 %}
                             <tr>
-                                <td>Aucun stagiaire pour le moment</td>
+                                <td>Aucun(e) stagiaire pour le moment</td>
                             </tr>
                         {% else %}
                             {% for stagiaire in session.stagiaires %}
@@ -100,39 +100,42 @@
                     </tbody>
                 </table>
             </div>
-    
-    
+        
             {# ------------------------------------------------------------------------------------------------ #}
             {# ----------------------------------- Stagiaires non inscrits ------------------------------------ #}
     
             {% if is_granted('ROLE_ADMIN') %}
         
                 <div id="stagiaires-noninscrits">
-                    <h3>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h3>
+                    <h2>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h2>
     
                     <table>
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th colspan="{{ is_granted('ROLE_ADMIN') ? 2 : 1 }}">Ville</th>
+                                <th colspan="2">Ville</th>
                             </tr>
                         </thead>
                         
                         <tbody>
-                            {% for stagiaire in stagiairesNonInscrits %}
-                                <tr class="tablerow-hover row-link" data-href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
-                                    <td>
-                                        {{ stagiaire.nom|upper ~ " " ~stagiaire.prenom|capitalize }}
-                                    </td>
-                                    <td>{{ stagiaire.ville }}</td>
-                                    <td>
-                                        <a class="text-hover" href="{{ path('add_stagiaire_to_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">
-                                            <i class="fa-solid fa-plus"></i>
-                                            Ajouter à la session
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                            {% if stagiairesNonInscrits|length < 1 %}
+                            <tr>
+                                <td>Aucun(e) stagiaire ajoutable test</td>
+                            </tr>
+                            {% else %}
+                                {% for stagiaire in stagiairesNonInscrits %}
+                                    <tr class="tablerow-hover row-link" data-href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
+                                        <td>{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</td>
+                                        <td>{{ stagiaire.ville }}</td>
+                                        <td>
+                                            <a class="text-hover" href="{{ path('add_stagiaire_to_session', {'id' : session.id, 'idStagiaire' : stagiaire.id}) }}">
+                                                <i class="fa-solid fa-plus"></i>
+                                                Ajouter à la session
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -145,7 +148,7 @@
 
 
     <div id="modules-noninscrits">
-        <h3>Module ajoutables (total: {{modulesNonUtilisés|length}})</h3>     
+        <h2>Module ajoutables (total: {{modulesNonUtilisés|length}})</h2>     
 
         <table>
             <thead>
