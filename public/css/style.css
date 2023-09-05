@@ -5,6 +5,10 @@
 	padding: 0;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 main {
     padding:2.5%;
 }
