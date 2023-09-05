@@ -29,15 +29,6 @@ tr {
     background-color: #c1d2e5;
 }
 
-.show-btn,
-.delete-btn {
-    color: #2b3c46;
-}
-
-.show-btn:hover {
-    opacity: 70%;
-}
-
 .delete-btn:hover {
     color:rgb(179, 42, 42);
 }
