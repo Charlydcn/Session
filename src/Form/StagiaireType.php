@@ -22,6 +22,12 @@ class StagiaireType extends AbstractType
             ->add('nom', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Dupont'
+                ],
+                'constraints' => [
+                    new Length([
+                        'max' => '20',
+                        'maxMessage' => 'Nom incorrect. (20 caractères max)',
+                    ])
                 ]
             ])
             
@@ -29,12 +35,24 @@ class StagiaireType extends AbstractType
                 'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'Jeanne'
+                ],
+                'constraints' => [
+                    new Length([
+                        'max' => '20',
+                        'maxMessage' => 'Prénom incorrect. (20 caractères max)',
+                    ])
                 ]
             ])
 
             ->add('courriel', EmailType::class, [
                 'attr' => [
                     'placeholder' => 'dupont.jeanne@exemple.fr'
+                ],
+                'constraints' => [
+                    new Length([
+                        'max' => '50',
+                        'maxMessage' => 'E-Mail incorrect. (50 caractères max)',
+                    ])
                 ]
             ])
 
@@ -47,6 +65,12 @@ class StagiaireType extends AbstractType
             ->add('ville', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Strasbourg, Colmar..'
+                ],
+                'constraints' => [
+                    new Length([
+                        'max' => '30',
+                        'maxMessage' => 'Ville incorrect. (30 caractères max)',
+                    ])
                 ]
             ])
 
@@ -59,9 +83,9 @@ class StagiaireType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Numéro de téléphone incorrect (trop court)',
+                        'minMessage' => 'Numéro de téléphone incorrect (6 caractères minimum)',
                         'max' => 15,
-                        'maxMessage' => 'Numéro de téléphone incorrect (trop long)'
+                        'maxMessage' => 'Numéro de téléphone incorrect (15 caractères maximum)'
                     ]),
                 ],
             ])
