@@ -8,9 +8,14 @@
 
 {% block body %}
 
+    <a class="goback-link" href="{{ path('app_formation') }}">
+        <i class="fa-solid fa-arrow-left"></i>
+        Liste des formations
+    </a>
+
     <h1>{{ formation }}</h1>
 
-    <h2>Sessions</h2>
+    <h2>Sessions disponibles</h2>
 
     <table>
         <thead>

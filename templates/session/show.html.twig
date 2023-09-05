@@ -7,13 +7,19 @@
 {% endblock %}
 
 {% block body %}
+
+    <a class="goback-link" href="{{ path('app_session') }}">
+        <i class="fa-solid fa-arrow-left"></i>
+        Liste des sessions
+    </a>
+
     <div id="prog-and-stags">
 
         <div id="programmes">
             <h1>
                 Session du {{ session.getDate }}
             </h1>
-            <a href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
+            <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
 
             <table>
                 <thead>
