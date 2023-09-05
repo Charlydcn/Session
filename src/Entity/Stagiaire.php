@@ -16,19 +16,19 @@ class Stagiaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 20)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 20)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 75)]
+    #[ORM\Column(length: 50)]
     private ?string $courriel = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateNaissance = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 30)]
     private ?string $ville = null;
 
     #[ORM\Column(length: 15)]
