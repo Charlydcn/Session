@@ -26,6 +26,7 @@ class StagiaireType extends AbstractType
             ])
             
             ->add('prenom', TextType::class, [
+                'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'Jeanne'
                 ]
@@ -38,6 +39,7 @@ class StagiaireType extends AbstractType
             ])
 
             ->add('dateNaissance', BirthdayType::class, [
+                'label' => 'Date de naissance',
                 'required' => false,
                 "widget" => "single_text",
             ])
@@ -49,12 +51,18 @@ class StagiaireType extends AbstractType
             ])
 
             ->add('telephone', TelType::class, [
+                'label' => 'Numéro de téléphone',
                 'attr' => [
                     'maxlength' => 15,
                     'placeholder' => '0612345678'
                 ],
                 'constraints' => [
-                    new Length(['min' => 10, 'max' => 15]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Numéro de téléphone incorrect (trop court)',
+                        'max' => 15,
+                        'maxMessage' => 'Numéro de téléphone incorrect (trop long)'
+                    ]),
                 ],
             ])
 
