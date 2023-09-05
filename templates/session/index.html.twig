@@ -15,16 +15,13 @@
             <tr>
                 <th colspan="2">Date</th>
                 <th>Places</th>
-                <th>Places restantes</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <th></th>
-                {% endif %}
+                <th colspan="{{ is_granted('ROLE_ADMIN') ? 2 : 1 }}">Places restantes</th>
             </tr>
         </thead>
         <tbody>
             {% for formation in formations %}
                 <tr class="formation row-link" data-href="{{ path('show_formation', {'id' : formation.id}) }}">
-                    <td colspan="6">{{ formation.intitule }}</td>
+                    <td colspan="{{ is_granted('ROLE_ADMIN') ? 5 : 4 }}">{{ formation.intitule }}</td>
                 </tr>
                 {% for session in formation.sessions %}
                 <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">

@@ -14,11 +14,7 @@
         <thead>
             <tr>
                 <th colspan="2">Nom</th>
-                <th>Ville</th>
-                {# si l'utilisateur est admin #}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <th></th>
-                {% endif %}
+                <th colspan={{ is_granted('ROLE_ADMIN') ? 2 : 1 }}>Ville</th>
             </tr>
         </thead>
         <tbody>

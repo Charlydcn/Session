@@ -18,18 +18,16 @@
         <div id="programmes">
             <h1>
                 Session du {{ session.getDate }}
+                <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
             </h1>
-            <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
 
+            <h2>Programme de la formation</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Catégorie</th>
                         <th>Module</th>
-                        <th>Durée en jours</th>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <th></th>
-                        {% endif %}
+                        <th colspan="{{ is_granted('ROLE_ADMIN') ? 2 : 1 }}">Durée en jours</th>
                     </tr>
                 </thead>
 
@@ -69,10 +67,7 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Ville</th>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <th></th>
-                            {% endif %}
+                            <th colspan="{{ is_granted('ROLE_ADMIN') ? 2 : 1 }}">Ville</th>
                         </tr>
                     </thead>
     
@@ -114,10 +109,7 @@
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Ville</th>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <th></th>
-                                {% endif %}
+                                <th colspan="{{ is_granted('ROLE_ADMIN') ? 2 : 1 }}">Ville</th>
                             </tr>
                         </thead>
                         
@@ -154,8 +146,7 @@
             <thead>
                 <tr>
                     <th>Intitulé</th>
-                    <th>Nombre de jours</th>
-                    <th></th>
+                    <th colspan="2">Nombre de jours</th>
                 </tr>
             </thead>
             <tbody>
