@@ -19,16 +19,19 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('nbPlaces', NumberType::class, [
+                'label' => 'Nombre de places',
                 'attr' => [
                     'int' => true,
                 ]
             ])
 
             ->add('dateDebut', DateType::class, [
+                'label' => 'Date de début',
                 "widget" => "single_text",
             ])
 
             ->add('dateFin', DateType::class, [
+                'label' => 'Date de fin',
                 "widget" => "single_text",
             ])
 
