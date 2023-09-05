@@ -46,7 +46,7 @@
 
             {# on affiche le bouton d'ajout de nouvelle session si l'utilisateur est connecté et admin #}
             {% if is_granted('ROLE_ADMIN') %}
-                <tr class="tablerow-hover row-link" data-href="{{ path('new_session') }}">
+                <tr class="row-link tablerow-hover" data-href="{{ path('new_session') }}">
                     <td class="new-btn" colspan="5">
                         <i class="fa-solid fa-plus"></i>
                         Ajouter une nouvelle session
