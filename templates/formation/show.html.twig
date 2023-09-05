@@ -2,6 +2,10 @@
 
 {% block title %}Détail formation{% endblock %}
 
+{% block metaTag %}
+    <meta name="description" content="Détails de la formation {{ formation }}">
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
 {% endblock %}

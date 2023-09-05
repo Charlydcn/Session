@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail stagiaire{% endblock %}
+{% block title %}Détails d'un(e) stagiaire{% endblock %}
+
+{% block metaTag %}
+    <meta name="description" content="Détails du stagiaire {{ stagiaire }}">
+{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/stagiaire/show.css') }}">

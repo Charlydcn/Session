@@ -2,6 +2,10 @@
 
 {% block title %}Stagiaires{% endblock %}
 
+{% block metaTag %}
+    <meta name="description" content="Liste de tout les stagiaires disponibles">
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
 {% endblock %}
@@ -37,7 +41,7 @@
         {# on affiche le bouton d'ajout de nouveau stagiaire si l'utilisateur est connecté et admin #}
         {% if is_granted('ROLE_ADMIN') %}
             <tr>
-                <td class="new-btn row-link" colspan="5" data-href="{{ path('new_stagiaire') }}">
+                <td class="new-btn row-link" colspan="4" data-href="{{ path('new_stagiaire') }}">
                     <i class="fa-solid fa-plus"></i>
                     Ajouter un nouveau stagiaire
                 </td>

@@ -2,6 +2,10 @@
 
 {% block title %}Sessions{% endblock %}
 
+{% block metaTag %}
+    <meta name="description" content="Liste de toute les sessions ainsi que leurs formations">
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/session/index.css') }}">
@@ -43,7 +47,7 @@
             {# on affiche le bouton d'ajout de nouvelle session si l'utilisateur est connecté et admin #}
             {% if is_granted('ROLE_ADMIN') %}
                 <tr class="tablerow-hover row-link" data-href="{{ path('new_session') }}">
-                    <td class="new-btn" colspan="6">
+                    <td class="new-btn" colspan="5">
                         <i class="fa-solid fa-plus"></i>
                         Ajouter une nouvelle session
                     </td>

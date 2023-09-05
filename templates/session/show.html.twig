@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détail session{% endblock %}
+{% block title %}Détails d'une session{% endblock %}
+
+{% block metaTag %}
+    <meta name="description" content="Détails de la session du {{ session.getDate }} de la formation {{ session.formation }}">
+{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/table.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/session/show.css') }}">
