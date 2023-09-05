@@ -7,6 +7,7 @@ use App\Entity\Formation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -20,36 +21,28 @@ class SessionType extends AbstractType
             ->add('nbPlaces', NumberType::class, [
                 'attr' => [
                     'int' => true,
-                    'class' => 'form-control',
                 ]
             ])
 
             ->add('dateDebut', DateType::class, [
                 "widget" => "single_text",
-                'attr' => [
-                    'class' => 'form-control'
-                ]
             ])
 
             ->add('dateFin', DateType::class, [
                 "widget" => "single_text",
-                'attr' => [
-                    'class' => 'form-control'
-                ]
             ])
 
             ->add('formation', EntityType::class, [
-                'class' => Formation::class,
-                'attr' => [
-                    'class' => 'form-control'
+                'class'  => Formation::class,
+                'constraints' => [
+                    new Length([
+                        'max' => '100',
+                        'maxMessage' => 'Formation incorrecte.',
+                    ])
                 ]
             ])
 
-            ->add('Valider', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-success'
-                ]
-            ])
+            ->add('Valider', SubmitType::class)
         ;
     }
 
