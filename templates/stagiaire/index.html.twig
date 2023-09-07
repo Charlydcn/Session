@@ -18,7 +18,11 @@
         <thead>
             <tr>
                 <th colspan="2">Nom</th>
-                <th colspan={{ is_granted('ROLE_ADMIN') ? 2 : 1 }}>Ville</th>
+                <th>Ville</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th></th>
+                    <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -29,6 +33,11 @@
                 <td>{{ stagiaire.ville }}</td>
                 {# si l'utilisateur est admin #}
                 {% if is_granted('ROLE_ADMIN') %}
+                    <td>
+                        <a class="edit-btn" href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
                     <td>
                         <a class="delete-btn" href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">
                             <i class="fa-solid fa-trash"></i>
@@ -41,7 +50,7 @@
         {# on affiche le bouton d'ajout de nouveau stagiaire si l'utilisateur est connecté et admin #}
         {% if is_granted('ROLE_ADMIN') %}
             <tr class="tablerow-hover">
-                <td class="new-btn row-link" colspan="4" data-href="{{ path('new_stagiaire') }}">
+                <td class="new-btn row-link" colspan="5" data-href="{{ path('new_stagiaire') }}">
                     <i class="fa-solid fa-plus"></i>
                     Ajouter un nouveau stagiaire
                 </td>

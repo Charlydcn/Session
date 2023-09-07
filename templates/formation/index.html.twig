@@ -21,6 +21,7 @@
                 <th>Nombre de sessions</th>
                 {% if is_granted('ROLE_ADMIN') %}
                     <th></th>
+                    <th></th>
                 {% endif %}
             </tr>
         </thead>
@@ -32,6 +33,11 @@
                     <td>{{ formation.sessions|length }}</td>
                     {% if is_granted('ROLE_ADMIN') %}
                         <td>
+                            <a class="edit-btn" href="{{ path('edit_formation', {'id': formation.id}) }}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
                             <a class="delete-btn" href="{{ path('delete_formation', {'id': formation.id}) }}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
@@ -42,7 +48,7 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <tr class="row-link tablerow-hover" data-href="{{ path('new_formation') }}">
-                    <td class="new-btn" colspan="3">
+                    <td class="new-btn" colspan="4">
                         <i class="fa-solid fa-plus"></i>
                         Ajouter une nouvelle formation
                     </td>
