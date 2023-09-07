@@ -17,14 +17,15 @@
         <i class="fa-solid fa-arrow-left"></i>
         Liste des sessions
     </a>
-
+    
+    <h1>
+        Session du {{ session.getDate }}
+        <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
+    </h1>
+    
     <div id="prog-and-stags">
 
         <div id="programmes">
-            <h1>
-                Session du {{ session.getDate }}
-                <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{session.formation}})</a>
-            </h1>
 
             <h2>Programme de la formation</h2>
             <table>
@@ -39,16 +40,13 @@
                 <tbody>
                     {# ------------------------------------------------------------------------------------------------ #}
                     {# ------------------------------------------ Programmes ------------------------------------------ #}
-                    {% if session.programmes|length < 1 %}
-                        <tr>
-                            <td>Aucune session pour le moment</td>
-                        </tr>
-                        {% else %}
-                            {% for programme in session.programmes %}
+                    {% if session.programmes|length > 0 %}
+                        {% for programme in session.programmes %}
                             <tr class="tablerow-hover">
                                 <td>{{ programme.module.categorie }}</td>
                                 <td>{{ programme.module }}</td>
                                 <td>{{ programme.nbJours }}</td>
+
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <td>
                                         <a class="delete-btn" href="{{ path('remove_module_from_session', {'id' : programme.id, 'sessionId' : session.id}) }}">
@@ -56,8 +54,13 @@
                                         </a>
                                     </td>
                                 {% endif %}
+
                             </tr>
-                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>Aucune session pour le moment</td>
+                        </tr>
                     {% endif %}
                 </tbody>
             </table>
@@ -108,7 +111,7 @@
         
                 <div id="stagiaires-noninscrits">
                     <h2>Stagiaires non inscrits (total: {{stagiairesNonInscrits|length}})</h2>
-    
+   
                     <table>
                         <thead>
                             <tr>
@@ -118,11 +121,11 @@
                         </thead>
                         
                         <tbody>
-                            {% if stagiairesNonInscrits|length < 1 %}
-                            <tr>
+                            {# {% if stagiairesNonInscrits|length != 0 %} #}
+                            {# <tr>
                                 <td>Aucun(e) stagiaire ajoutable test</td>
-                            </tr>
-                            {% else %}
+                            </tr> #}
+                            {# {% else %} #}
                                 {% for stagiaire in stagiairesNonInscrits %}
                                     <tr class="tablerow-hover row-link" data-href="{{ path('show_stagiaire', {'id' : stagiaire.id}) }}">
                                         <td>{{ stagiaire.nom ~ " " ~ stagiaire.prenom }}</td>
@@ -135,7 +138,7 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
-                            {% endif %}
+                            {# {% endif %} #}
                         </tbody>
                     </table>
                 </div>
