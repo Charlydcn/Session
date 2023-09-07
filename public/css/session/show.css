@@ -1,17 +1,22 @@
 #prog-and-stags {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: flex-start;
     gap: 1rem;
 }
 
-#programmes h1 {
+h1:only-of-type {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-#programmes h1 a {
+thead th,
+table td {
+    padding: .5rem 1rem;
+}
+
+h1:only-of-type a {
     font-size: 16px;
     text-decoration: none;
     color:unset;
@@ -24,8 +29,12 @@
     margin: 2.5% 0;
 }
 
+#programmes {
+    width: 80%;
+}
+
 #programmes table {
-    width:unset;
+    width:100%;
 }
 
 #stagiaires table {
@@ -71,7 +80,7 @@
         margin-bottom: 7.5%;
     }
 
-    #programmes h1 {
+    h1:only-of-type {
         margin: 1.5rem 0;
     }
 
