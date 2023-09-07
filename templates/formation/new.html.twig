@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une formation{% endblock %}
+
+{% block metaTag %}
+    <meta name="description" content="Formulaire d'ajout d'une nouvelle formation">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/form.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <h1>Ajouter une formation</h1>
+
+    {{ form(addFormationForm) }}
+
+{% endblock %}
