@@ -21,23 +21,29 @@
 
     <h2>Sessions disponibles</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">Date</th>
-                <th>Places</th>
-                <th>Places restantes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for session in formation.sessions %}
-            <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">
-                <td colspan="2">{{ session.getDate }}</td>
-                <td>{{ session.nbPlaces }}</td>
-                <td>{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% if formation.sessions|length > 0 %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Date</th>
+                    <th>Places</th>
+                    <th>Places restantes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in formation.sessions %}
+                <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">
+                    <td colspan="2">{{ session.getDate }}</td>
+                    <td>{{ session.nbPlaces }}</td>
+                    <td>{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+        <h3>Aucune session programmée pour cette formation</h3>
+    {% endif %}
 
 {% endblock %}
