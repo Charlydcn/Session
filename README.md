@@ -57,47 +57,45 @@
 
 <h4>Liste des sessions/Sessions list</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/session_index.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_index.gif">
     <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_index_mobile.png" width="25%">
 </div>
 
 <h4>Détails d'une session/Session details (admin)</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/session_show.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/session_show_mobile.gif" height="25%">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_show.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_show_mobile.gif" width="20%">
 </div>
 
 <h4>Édition d'une session/Session editing</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/session_edit.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/session_edit_stag_mobile.gif" height="25%">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/session_edit_programme_mobile.gif" height="25%">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_edit.gif"><br>
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_edit_stag_mobile.gif" width="20%">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_edit_programme_mobile.gif" width="20%">
+</div>
+
+<h4>Création d'une session/Session creation</h4>
+<div display="flex" flex-direction="row">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_new.gif"><br>
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_new_mobile.gif" width="20%">
 </div>
 
 <h4>Création d'un stagiaire/Trainee creation</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/stagiaire_new.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/stagiaire_new_mobile.png" height="25%">
-    <figure>
-        <figcaption>Erreurs gérées/Errors handled (+ min Length)</figcaption>
-        <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/stagiaire_new_errors.png">
-    </figure>
-</div>
-
-<h4>Édition d'un programme de session/Session program edition</h4>
-<div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/overall_view.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/overall_view_mobile.gif" height="25%">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/stagiaire_new.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/stagiaire_new_mobile.png" width="20%">
+    <p>Erreurs gérées/Errors handled (+ min Length)</p>
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/stagiaire_new_errors.png" width="25%">
 </div>
 
 <h4>Inscription/Registration</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/overall_view.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/overall_view_mobile.gif" height="25%">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/overall_view.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/overall_view_mobile.gif">
 </div>
 
 <h4>Erreurs gérée sur l'authentification/Errors handled on authentication</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/overall_view.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/overall_view_mobile.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/overall_view.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/overall_view_mobile.gif">
 </div>
