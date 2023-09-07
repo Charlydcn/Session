@@ -106,6 +106,6 @@
 
 <h4>Authentification/Authentication</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/registration.gif">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/login_mobile.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/registration.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/gif/login_mobile.gif">
 </div>
