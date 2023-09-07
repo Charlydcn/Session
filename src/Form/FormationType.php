@@ -25,9 +25,7 @@ class FormationType extends AbstractType
                     ],
             ])
 
-            ->add('submit', SubmitType::class, [
-                'label' => 'Créer',
-            ]);
+            ->add('Valider', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
