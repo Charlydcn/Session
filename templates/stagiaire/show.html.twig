@@ -29,8 +29,8 @@
             <li><span>Téléphone :</span> {{ stagiaire.telephone }}</li>
             <li><span>Sexe :</span> {{ stagiaire.sexe ? stagiaire.sexe : "Non renseigné" }}</li>
         </ul>
-        {% if stagiaire.sessions %}
-            <h2>Sessions inscrites</h2>
+        <h2>Sessions inscrites</h2>
+        {% if stagiaire.sessions|length > 0 %}
             <ul>
                 {% for session in stagiaire.sessions %}
                     <li>
@@ -38,7 +38,9 @@
                         <a class="text-hover" href="{{ path('show_formation', {'id' : session.formation.id}) }}">({{ session.formation }})</a>
                     </li>
                 {% endfor %}
-            </ul>  
+            </ul>
+            {% else %}
+            Ce stagiaire n'est inscrit(e) à aucune session
         {% endif %}
     </div>
 
