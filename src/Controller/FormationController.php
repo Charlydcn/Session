@@ -26,12 +26,12 @@ class FormationController extends AbstractController
     }
 
     #[Route('/formation/new', name: 'new_formation')]
-    // #[Route('/formation/{id}/edit', name: 'edit_formation')]
+    #[Route('/formation/{id}/edit', name: 'edit_formation')]
     public function new(Formation $formation = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        // if (!$formation) {
+        if (!$formation) {
             $formation = new Formation();
-        // }
+        }
         
         // On créer le formulaire à partir du formType (formationType)
         $form = $this->createForm(FormationType::class, $formation);
@@ -54,7 +54,7 @@ class FormationController extends AbstractController
         
         return $this->render('formation/new.html.twig', [
             'addFormationForm' => $form,
-            // 'edit' => $formation->getId()
+            'edit' => $formation->getId()
         ]);
     }
 

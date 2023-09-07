@@ -24,12 +24,12 @@ class StagiaireController extends AbstractController
     }
 
     #[Route('/stagiaire/new', name: 'new_stagiaire')]
-    // #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
+    #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
     public function new(Stagiaire $stagiaire = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        // if (!$stagiaire) {
+        if (!$stagiaire) {
             $stagiaire = new Stagiaire();
-        // }
+        }
         
         // On créer le formulaire à partir du formType (stagiaireType)
         $form = $this->createForm(StagiaireType::class, $stagiaire);
@@ -52,7 +52,7 @@ class StagiaireController extends AbstractController
         
         return $this->render('stagiaire/new.html.twig', [
             'addStagiaireForm' => $form,
-            // 'edit' => $stagiaire->getId()
+            'edit' => $stagiaire->getId()
         ]);
     }
 
