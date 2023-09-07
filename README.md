@@ -63,7 +63,7 @@
 
 <h4>Détails d'une session/Session details (admin)</h4>
 <div display="flex" flex-direction="row">
-    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_show.gif">
+    <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_show.gif"><br>
     <img src="https://raw.githubusercontent.com/Charlydcn/Session/master/public/img/demo/session_show_mobile.gif" width="35%">
 </div>
 
