@@ -23,8 +23,13 @@ table a {
 }
 
 tr,
+.edit-btn i,
 .delete-btn i {
     transition: .3s;
+}
+
+.edit-btn:hover i {
+    transform: scale(1.2);
 }
 
 .tablerow-hover:hover {
