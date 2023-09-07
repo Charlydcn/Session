@@ -12,7 +12,12 @@
 
 {% block body %}
 
-    <h1>Ajouter une formation</h1>
+    {% if edit %}
+        <h1>Modifier une formation</h1>
+    {% else %}
+        <h1>Ajouter une formation</h1>    
+    {% endif %}
+
 
     {{ form(addFormationForm) }}
 

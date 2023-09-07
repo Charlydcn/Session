@@ -12,7 +12,11 @@
 
 {% block body %}
 
-    <h1>Ajouter un stagiaire</h1>
+    {% if edit %}
+        <h1>Modifier un(e) stagiaire</h1>
+    {% else %}
+        <h1>Ajouter un(e) stagiaire</h1>    
+    {% endif %}
 
     {{ form(addStagiaireForm) }}
 
