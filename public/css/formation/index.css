@@ -1,3 +1,8 @@
 h1 + table:first-of-type {
     width:unset;
 }
+
+td:nth-of-type(2),
+th:nth-of-type(2) {
+    padding:0;
+}
