@@ -24,24 +24,36 @@
         </thead>
         <tbody>
             {% for formation in formations %}
+
                 <tr class="formation row-link" data-href="{{ path('show_formation', {'id' : formation.id}) }}">
                     <td colspan="{{ is_granted('ROLE_ADMIN') ? 5 : 4 }}">{{ formation.intitule }}</td>
                 </tr>
-                {% for session in formation.sessions %}
-                <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">
-                    <td colspan="2">{{session.getDate}}</td>
-                    <td>{{ session.nbPlaces }}</td>
-                    <td>{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <td>
-                            <a class="delete-btn" href="{{ path('delete_session', {'id': session.id}) }}">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                    {% endif %}
-                    
-                </tr>
-                {% endfor %}
+
+                {# si il a des sessions programmées sur cette formation: #}
+                {% if formation.sessions|length > 0 %}
+                    {# pour chaque sessions de cette formation: #}
+                    {% for session in formation.sessions %}
+                        <tr class="tablerow-hover row-link" data-href="{{ path('show_session', {'id' : session.id}) }}">
+                            <td colspan="2">{{session.getDate}}</td>
+                            <td>{{ session.nbPlaces }}</td>
+                            <td>{{ (session.nbPlaces - session.getStagiaires|length) }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="delete-btn" href="{{ path('delete_session', {'id': session.id}) }}">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            {% endif %}
+                            
+                        </tr>
+                    {% endfor %}
+
+                    {# si il n'y a aucune session programmée pour cette formation #}
+                    {% else %}
+                        <tr>
+                            <td>Aucune session programmée</td>
+                        </tr>
+                {% endif %}
             {% endfor %}
 
             {# on affiche le bouton d'ajout de nouvelle session si l'utilisateur est connecté et admin #}
